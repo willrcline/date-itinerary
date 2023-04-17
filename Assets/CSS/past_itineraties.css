@@ -1,0 +1,7 @@
+body {
+    background-image: url('../images/shutterstock_96325322.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.8;
+}
