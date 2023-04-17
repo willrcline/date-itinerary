@@ -1,0 +1,147 @@
+.translucent-form-overlay {
+    max-width: 400px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    color: #fefefe;
+}
+
+.translucent-form-overlay .columns.row {
+    display: block;
+}
+
+.translucent-form-overlay h3,
+.translucent-form-overlay label {
+    color: #fefefe;
+}
+
+.translucent-form-overlay input,
+.translucent-form-overlay select {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input::-webkit-input-placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input:-ms-input-placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input::placeholder {
+    color: #8a8a8a;
+}
+
+.bg-dark {
+    background-color: #1a1a1a;
+}
+
+.text-light {
+    color: #d9e9e8;
+}
+
+.btn {
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    margin: 0;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    border: 1px solid transparent;
+    outline: none;
+    color: #1a1a1a;
+    background-color: #aeaeae;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.btn.btn-info {
+    background-color: #1bbc9b;
+    color: #ffffff;
+}
+
+.btn.btn-info:hover {
+    background-color: #31e1bd;
+}
+h1 {
+    color:white;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.3);
+    /* 80% opacity */
+}
+#navbar-list {
+    background-color: transparent;
+}
+
+body {
+    background-image: url('../images/shutterstock_96325322.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.8;
+}
+
+#itinerary-btn {
+    width: 50%
+}
+
+.transparent-text-box {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.transparent-text-box:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: url('../images/transparent-texture.png') repeat;
+    opacity: 0.3;
+}
+
+.transparent-text-box h2 {
+    color: #1a1a1a;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    height: 630px;
+}
+
+.title {
+    text-align: center;
+}
+
+#start-date-container {
+    margin-top: 100px;
+}
+
+.search-btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-btn button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
