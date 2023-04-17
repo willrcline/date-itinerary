@@ -1,9 +1,14 @@
+* {
+font-family: 'Catamaran',
+sans-serif;}
+
 .translucent-form-overlay {
+    font-family: 'Catamaran';
     max-width: 400px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 20px;
-    color: #fefefe;
+    color: #000000;
 }
 
 .translucent-form-overlay .columns.row {
@@ -12,7 +17,13 @@
 
 .translucent-form-overlay h3,
 .translucent-form-overlay label {
-    color: #fefefe;
+    font-family: 'Catamaran';
+    color: #000000;
+    
+}
+
+h4 {
+    font-family: 'Catamaran';
 }
 
 .translucent-form-overlay input,
@@ -65,11 +76,12 @@
     background-color: #31e1bd;
 }
 h1 {
-    color:white;
+    color:rgb(255, 255, 255);
+    font-family: 'Catamaran';
 }
 
 .navbar {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.7);
     /* 80% opacity */
 }
 #navbar-list {
@@ -92,7 +104,7 @@ body {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 50px;
     text-align: center;
     box-sizing: border-box;

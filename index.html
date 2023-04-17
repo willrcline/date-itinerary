@@ -7,6 +7,11 @@
   <title>Foundation | Welcome</title>
   <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;700&family=Lora:ital@1&family=Taviraj:wght@100&family=Wallpoet&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body class="bg-dark text-light">
@@ -14,7 +19,7 @@
   <!-- Start Top Bar -->
   <div class="top-bar navbar">
     <div class="top-bar-left">
-      <a href="./past_itineraries.html" target = "_blank" class="btn btn-info">Past Itineraries</a>
+      <a href="./past_itineraries.html" target="_blank" class="btn btn-info">Past Itineraries</a>
 
     </div>
     <div class="top-bar-right">
@@ -50,14 +55,12 @@
             <h3>Start your date here by entering parameters!</h3>
             <div class="row columns">
               <label>Location
-                <input type="text" name="keyword" placeholder="Any">
+                <input type="text" name="keyword" placeholder="City, State or Zip">
               </label>
             </div>
             <div class="row columns">
               <label>Date
-                <!-- <input type="text" name="location" placeholder="Any"> -->
                 <input type="text" id="myDatepicker">
-
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <script>
                   flatpickr("#myDatepicker", {
@@ -69,16 +72,19 @@
             <div class="row columns">
               <label>Time of Day
                 <select name="status" type="text">
+                  <option></option>
                   <option>Morning</option>
                   <option value="office">Afternoon</option>
                   <option value="building">Evening</option>
                 </select>
               </label>
             </div>
+
             <div class="row columns">
               <label>Type of Event
-                <select name="status" type="text">
-                  <option>Food & Drink</option>
+                <select name="type" id="event-type" type="text">
+                  <option></option>
+                  <option>Food &amp; Drinks</option>
                   <option>Music Events</option>
                   <option>Sporting Events</option>
                   <option>Movie Theatre</option>
@@ -87,16 +93,49 @@
               </label>
             </div>
 
+            <div class="row columns" id="cuisine-dropdown" style="display:none;">
+              <label>Cuisine
+                <select name="cuisine-dropdown" type="text">
+                  <option>Italian Cuisine</option>
+                  <option>French Cuisine</option>
+                  <option>Chinese Cuisine</option>
+                  <option>Japanese Cuisine</option>
+                  <option>Vegetarian Options</option>
+                </select>
+              </label>
+            </div>
 
-            <!-- <div class="row">
-              <label class="columns small-12">Price</label>
-              <div class="columns small-6">
-                <input type="number" min="0" name="min" placeholder="Min">
-              </div>
-              <div class="columns small-6">
-                <input type="number" min="0" name="max" placeholder="Max">
-              </div>
-            </div> -->
+            <div id="music-genre-dropdown" style="display: none;">
+              <label for="music-genre">Music Genre:</label>
+              <select id="music-genre" name="music-genre">
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="jazz">Jazz</option>
+                <option value="hip-hop">Hip Hop</option>
+                <option value="classical">Classical</option>
+              </select>
+            </div>
+
+            <div id="sport-type-dropdown" style="display: none;">
+              <label for="sport-type">Sport Type:</label>
+              <select id="sport-type" name="sport-type">
+                <option value="basketball">Basketball</option>
+                <option value="football">Football</option>
+                <option value="baseball">Baseball</option>
+              </select>
+            </div>
+
+            <div id="movie-genre-dropdown" style="display: none;">
+              <label for="movie-genre">Movie Genre:</label>
+              <select id="movie-genre" name="movie-genre">
+                <option value="action">Action</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+                <option value="romance">Romance</option>
+                <option value="horror">Horror</option>
+              </select>
+            </div>
+          
             <button type="button" class="primary button expanded search-button" id="itinerary-btn">
               Add to Itinerary
             </button>
@@ -117,18 +156,7 @@
       </div>
     </div>
   </div>
-  <!-- 
-  <div class="row column">
-    <ul class="pagination" role="navigation" aria-label="Pagination">
-      <li class="disabled">Previous</li>
-      <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
-      <li><a href="#" aria-label="Page 2">2</a></li>
-      <li><a href="#" aria-label="Page 3">3</a></li>
-      <li><a href="#" aria-label="Page 4">4</a></li>
-      <li class="ellipsis"></li>
-      <li><a href="#" aria-label="Page 12">12</a></li>
-      <li><a href="#" aria-label="Page 13">13</a></li>
-      <li><a href="#" aria-label="Next page">Next</a></li> -->
+
   </ul>
   </div>
 
