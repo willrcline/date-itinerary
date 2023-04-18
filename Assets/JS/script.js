@@ -65,7 +65,36 @@ function callOpenAIAPI(prompt) {
     });
 }
 
-// callOpenAIAPI(createPromptForOpenAIAPI())
+
+//TODO: itinerary to local storage
+// function saveItinerary(itinerary) {
+//     localStorage.setItem('itinerary', JSON.stringify(itinerary));
+// }
+
+//TODO:itinerary from local storage
+// function getItinerary() {
+//     const itineraryString = localStorage.getItem('itinerary');
+//     return itineraryString ? JSON.parse(itineraryString) : null;
+// }
+
+//TODO: helper function for date and time formatting
+// function formatDate(date) {
+    // format date in your desired format
+// }
+
+// function formatTime(time) {
+    // format time in your desired format
+// }
+
+//TODO: clear section of page
+// function clearSection(sectionId) {
+//     const section = document.getElementById(sectionId);
+//     section.innerHTML = '';
+// }
+
+
+callOpenAIAPI(createPromptForOpenAIAPI())
+
 
 function createPromptForOpenAIAPI() {
     var location = "Austin, Texas"
