@@ -22,7 +22,7 @@ sans-serif;}
     
 }
 
-h4 {
+h4, h3 {
     font-family: 'Catamaran';
 }
 
@@ -161,4 +161,10 @@ body {
 
 label {
     font-size: 1.3rem;
+}
+
+#generate-itinerary {
+    width: 100%;
+    height: auto;
+    overflow: auto;
 }
