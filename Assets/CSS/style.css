@@ -28,7 +28,7 @@ h4 {
 
 .translucent-form-overlay input,
 .translucent-form-overlay select {
-    color: #8a8a8a;
+    color: #000000;
 }
 
 .translucent-form-overlay input::-webkit-input-placeholder {
@@ -40,7 +40,7 @@ h4 {
 }
 
 .translucent-form-overlay input::placeholder {
-    color: #8a8a8a;
+    color: #000000;
 }
 
 .bg-dark {
@@ -48,7 +48,7 @@ h4 {
 }
 
 .text-light {
-    color: #d9e9e8;
+    color: #000000;
 }
 
 .btn {
@@ -68,16 +68,17 @@ h4 {
 }
 
 .btn.btn-info {
-    background-color: #1bbc9b;
+    background-color: #202f6b;
     color: #ffffff;
 }
 
 .btn.btn-info:hover {
     background-color: #31e1bd;
 }
+
 h1 {
     color:rgb(255, 255, 255);
-    font-family: 'Catamaran';
+    font-family: 'Cormorant Garamond';
 }
 
 .navbar {
@@ -156,4 +157,8 @@ body {
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+label {
+    font-size: 1.3rem;
 }
