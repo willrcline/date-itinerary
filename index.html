@@ -12,6 +12,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;700&family=Lora:ital@1&family=Taviraj:wght@100&family=Wallpoet&display=swap"
     rel="stylesheet">
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;700&family=Cormorant+Garamond&family=Lora:ital@1&family=Taviraj:wght@100&family=Wallpoet&display=swap"
+      rel="stylesheet">
+      
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body class="bg-dark text-light">
@@ -42,8 +47,8 @@
     <div class="medium-8 columns">
       <div class="blog-post">
         <div class="transparent-text-box">
-          <h2>Your Text Here</h2>
-          <p>Additional text can go here</p>
+          <h3>Your Itinerary</h3>
+          <p id="generate-itinerary"></p>
         </div>
 
       </div>
@@ -52,7 +57,9 @@
       <div class="sticky" data-sticky data-anchor="content">
         <div class="translucent-form-overlay">
           <form>
-            <h3>Start your date here by entering parameters!</h3>
+            <div class="row columns text-center">
+              <h3>Start your date here by entering parameters!</h3>
+            </div>
             <div class="row columns">
               <label>Location
                 <input type="text" name="keyword" placeholder="City, State or Zip">
@@ -135,7 +142,7 @@
                 <option value="horror">Horror</option>
               </select>
             </div>
-          
+
             <button type="button" class="primary button expanded search-button" id="itinerary-btn">
               Add to Itinerary
             </button>
