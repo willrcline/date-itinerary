@@ -1,5 +1,7 @@
 import { OpenAIAPIKey } from "./config.js"
 
+var itineraryList = []
+
 var eventTypeSelect = document.getElementById("event-type");
 var cuisineDropdown = document.getElementById("cuisine-dropdown");
 var sportTypeDropdown = document.getElementById("sport-type-dropdown");
@@ -54,15 +56,16 @@ function callOpenAIAPI(prompt) {
     })
     .then((response) => response.json())
     .then((result) => {
-        console.log(result);
-        console.log(result.choices[0].message.content)
+        var promptResponse = result.choices[0].message.content
+        var pEl = $('#generate-itinerary')
+        pEl.text(promptResponse)
     })
     .catch((error) => {
         console.error('Error:', error);
     });
 }
 
-callOpenAIAPI(createPromptForOpenAIAPI())
+// callOpenAIAPI(createPromptForOpenAIAPI())
 
 function createPromptForOpenAIAPI() {
     var location = "Austin, Texas"
@@ -93,21 +96,15 @@ function createPromptForOpenAIAPI() {
     return prompt
 }
 
-// $("#itinerary-btn").on("submit", handleAddToItineraryButton)
-// $("#search-btn").on("click", handleSearchButton)
+$("#itinerary-btn").on("submit", handleAddToItineraryButton)
+$("#search-btn").on("click", handleSearchButton)
 
-// function handleAddToItineraryButton() {
-//     //.push input to list 
-// }
+function handleAddToItineraryButton() {
+    //.push input to list 
+    console.log("test")
+}
 
-// function handleSearchButton() {
-    
-// }
-
-
-
-// ("")
-// function handleHistoryLink() {
-
-// }
+function handleSearchButton() {
+    callOpenAIAPI(createPromptForOpenAIAPI())
+}
 
