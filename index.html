@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foundation | Welcome</title>
+  <title>Date Itinerary Generator</title>
   <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +62,7 @@
             </div>
             <div class="row columns">
               <label>Location
-                <input type="text" name="keyword" placeholder="City, State or Zip">
+                <input id="location" type="text" name="keyword" placeholder="City, State or Zip">
               </label>
             </div>
             <div class="row columns">
@@ -70,6 +70,8 @@
                 <input type="text" id="myDatepicker">
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <script>
+                  // $("#myDatepicker").flatpickr(optional_config);
+
                   flatpickr("#myDatepicker", {
                     dateFormat: "m-d-Y"
                   });
@@ -78,11 +80,11 @@
             </div>
             <div class="row columns">
               <label>Time of Day
-                <select name="status" type="text">
+                <select id="timeOfDay" name="status" type="text">
                   <option></option>
                   <option>Morning</option>
-                  <option value="office">Afternoon</option>
-                  <option value="building">Evening</option>
+                  <option>Afternoon</option>
+                  <option>Evening</option>
                 </select>
               </label>
             </div>
@@ -92,7 +94,7 @@
                 <select name="type" id="event-type" type="text">
                   <option></option>
                   <option>Food &amp; Drinks</option>
-                  <option>Music Events</option>
+                  <option>Music Events</option> 
                   <option>Sporting Events</option>
                   <option>Movie Theatre</option>
                   <option>Hotels</option>
@@ -149,12 +151,8 @@
           </form>
         </div>
         <div class="translucent-form-overlay">
-          <h4>Itinerary List</h4>
-          <ul>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
-            <li><a href="#"></a></li>
+          <h4>Desired Events</h4>
+          <ul id="itinerary-list">
           </ul>
           <div class="search-btn" id="search-btn">
             <button>Search</button>
