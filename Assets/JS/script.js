@@ -4,14 +4,15 @@ var itineraryList = []
 var realEvents = []
 var subEvent
 
-var specificEvent = document.getElementById("specific-event");
 var eventTypeSelect = document.getElementById("event-type");
-var cuisineSelect = document.getElementById("cuisine-select");
 var cuisineDropdown = document.getElementById("cuisine-dropdown");
 var sportTypeDropdown = document.getElementById("sport-type-dropdown");
-var musicGenreSelect = $("#music-genre-select");
 var musicGenreDropdown = document.getElementById("music-genre-dropdown");
 var movieGenreDropdown = document.getElementById("movie-genre-dropdown");
+var cuisineSelect = $("#cuisine-select");
+var musicGenreSelect = $("#music-genre-select");
+var sportingSelect = $("#sporting-select");
+var movieGenreSelect = $("#movie-genre-select");
 
 eventTypeSelect.addEventListener("change", function () {
 
@@ -32,11 +33,13 @@ eventTypeSelect.addEventListener("change", function () {
         sportTypeDropdown.style.display = "block";
         musicGenreDropdown.style.display = "none";
         movieGenreDropdown.style.display = "none";
+        subEvent = sportingSelect.val()
     } else if (eventTypeSelect.value == "Movie Theatre") {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "none";
         musicGenreDropdown.style.display = "none";
         movieGenreDropdown.style.display = "block";
+        subEvent = movieGenreSelect.val()
     } else {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "none";
