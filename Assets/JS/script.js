@@ -3,6 +3,7 @@ import { OpenAIAPIKey } from "./config.js"
 var itineraryList = []
 var realEvents = []
 
+var specificEvent = document.getElementById("specific-event");
 var eventTypeSelect = document.getElementById("event-type");
 var cuisineDropdown = document.getElementById("cuisine-dropdown");
 var sportTypeDropdown = document.getElementById("sport-type-dropdown");
@@ -132,7 +133,7 @@ $("#search-btn").on("click", handleSearchButton)
 
 function handleAddToItineraryButton() {
     //.push input to list 
-    var eventTypeInput = $("#event-type").val()
+    var eventTypeInput = $("#specific-event").val()
     itineraryList.push(eventTypeInput)
     //append to screen
     //clearSection("#itinerary-list")
