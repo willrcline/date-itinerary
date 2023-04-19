@@ -2,24 +2,30 @@ import { OpenAIAPIKey } from "./config.js"
 
 var itineraryList = []
 var realEvents = []
+var subEvent
 
 var eventTypeSelect = document.getElementById("event-type");
+var cuisineSelect = document.getElementById("cuisine-select");
 var cuisineDropdown = document.getElementById("cuisine-dropdown");
 var sportTypeDropdown = document.getElementById("sport-type-dropdown");
+var musicGenreSelect = $("#music-genre-select");
 var musicGenreDropdown = document.getElementById("music-genre-dropdown");
 var movieGenreDropdown = document.getElementById("movie-genre-dropdown");
 
 eventTypeSelect.addEventListener("change", function () {
+
     if (eventTypeSelect.value == "Food & Drinks") {
         cuisineDropdown.style.display = "block";
         sportTypeDropdown.style.display = "none";
         musicGenreDropdown.style.display = "none";
         movieGenreDropdown.style.display = "none";
+        subEvent = cuisineSelect.val()
     } else if (eventTypeSelect.value == "Music Events") {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "none";
         musicGenreDropdown.style.display = "block";
         movieGenreDropdown.style.display = "none";
+        subEvent = musicGenreSelect.val()
     } else if (eventTypeSelect.value == "Sporting Events") {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "block";
@@ -49,7 +55,6 @@ eventTypeSelect.addEventListener("change", function () {
 function callEventAPI(event, itineraryInputs) {
     const API_KEY = 'b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837';
     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
-    console.log(QUERY)
     const ENGINE = 'google_events';
     const HL = 'en';
     const GL = 'us';
@@ -65,9 +70,12 @@ function callEventAPI(event, itineraryInputs) {
         return response.json();
     })
     .then((data) => {
-        console.log(data["events_results"]);
-        return data["event_results"][0]
-        // Process the data here, e.g., display search results on the page
+        var firstEventResult = data.events_results[0]
+        console.log(firstEventResult)
+        realEvents.push(firstEventResult)
+        return firstEventResult
+        //.description
+        //.title
     })
     .catch((error) => {
         console.error('There was a problem with the fetch operation:', error);
@@ -93,7 +101,6 @@ function callOpenAIAPI(prompt) {
     })
     .then((response) => response.json())
     .then((result) => {
-        console.log(result)
         var promptResponse = result.choices[0].message.content
         var pEl = $('#generate-itinerary')
         pEl.text(promptResponse)
@@ -114,7 +121,6 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
     for (var i = 0; i < realEvents.length; i++) {
         var realEvent = realEvents[i];
-        console.log("realEvent: " +realEvent)
         //TODO: Change the wording to not say event 1 and event 2
         prompt += "Event title: " + realEvent.title + "\n" + "Event Venue: " + realEvent.venue.name + "\n" + "Event Description: " + realEvent.description + "\n"
     }
@@ -123,7 +129,6 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     6:00 PM - Start the night" + "\n\
     Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature." 
     
-    console.log(prompt)
     return prompt
 }
 
@@ -132,8 +137,7 @@ $("#search-btn").on("click", handleSearchButton)
 
 function handleAddToItineraryButton() {
     //.push input to list 
-    var eventTypeInput = $("#event-type").val()
-    itineraryList.push(eventTypeInput)
+    itineraryList.push(subEvent)
     //append to screen
     //clearSection("#itinerary-list")
     renderItineraryList()
@@ -164,11 +168,8 @@ function handleSearchButton(e) {
 
     for (var event of itineraryList) {
         var firstEventResult = callEventAPI(event, itineraryInputs)
-        realEvents.push(firstEventResult)
     }
-    console.log(realEvents)
-
-    callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
+//     callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
 
 
