@@ -1,12 +1,13 @@
 * {
 font-family: 'Catamaran',
-sans-serif;}
+sans-serif;
+}
 
 .translucent-form-overlay {
     font-family: 'Catamaran';
     max-width: 400px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     color: #000000;
 }
@@ -98,14 +99,18 @@ body {
 }
 
 #itinerary-btn {
-    width: 50%
+    width: 50%;
+    color:black !important;
+    font-weight:bold;
 }
+
+
 
 .transparent-text-box {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 50px;
     text-align: center;
     box-sizing: border-box;
@@ -167,4 +172,23 @@ label {
     width: 100%;
     height: auto;
     overflow: auto;
+}
+
+#itinerary-list {
+    font-weight: bold;
+}
+
+.delete-btn {
+    border: 2px solid rgb(255, 0, 0);
+    border-radius: 50%;
+    background-color: transparent;
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+#itinerary-list li {
+    border: 1px solid black;
+    padding: 10px;
 }

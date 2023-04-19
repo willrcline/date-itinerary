@@ -15,7 +15,6 @@ var sportingSelect = $("#sporting-select");
 var movieGenreSelect = $("#movie-genre-select");
 
 eventTypeSelect.addEventListener("change", function () {
-
     if (eventTypeSelect.value == "Food & Drinks") {
         cuisineDropdown.style.display = "block";
         sportTypeDropdown.style.display = "none";
@@ -47,6 +46,23 @@ eventTypeSelect.addEventListener("change", function () {
         movieGenreDropdown.style.display = "none";
     }
 });
+
+cuisineSelect.on("change", function () {
+    subEvent = cuisineSelect.val()
+});
+
+musicGenreSelect.on("change", function () {
+    subEvent = musicGenreSelect.val()
+});
+
+sportingSelect.on("change", function () {
+    subEvent = sportingSelect.val()
+});
+
+movieGenreSelect.on("change", function () {
+    subEvent = movieGenreSelect.val()
+});
+
 
 
 // curl --get https://serpapi.com/search \
@@ -140,28 +156,46 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
 $("#search-btn").on("click", handleSearchButton)
+
 function handleAddToItineraryButton() {
     //.push input to list
     var eventTypeInput = $('#event-type').val();
     if (!itineraryList.includes(eventTypeInput)) {
+        itineraryList.push(subEvent + ", " + eventTypeInput);
+        
         //ToDo: instead of just pushing subEvent to a list, append both the event and sub event concatenated to that list like "subEvent + " " + event" (ie "baseball sporting events")
         itineraryList.push(subEvent);
+
         //append to screen
         //clearSection(“#itinerary-list”)
     }
     renderItineraryList();
 }
-export function renderItineraryList() {
+
+function renderItineraryList() {
     var itineraryListEl = $("#itinerary-list")
     itineraryListEl.empty();
     for (var itineraryItem of itineraryList) {
-        var itemEl = $("<li>")
-            itemEl.text(itineraryItem);
-            itineraryListEl.append(itemEl);
+        var itemEl = $("<li>");
+        var deleteBtn = $("<button>");
+        deleteBtn.text("X");
+        deleteBtn.addClass("delete-btn");
+        deleteBtn.click(function () {
+            $(this).parent().remove();
+        });
+        itemEl.text(itineraryItem);
+        itemEl.append(deleteBtn);
+        itineraryListEl.append(itemEl);
     }
 }
 
-export function handleSearchButton(e) {
+$(document).on("click", ".remove-btn", function () {
+    var index = $(this).attr("data-index");
+    itineraryList.splice(index, 1);
+    renderItineraryList();
+});
+
+function handleSearchButton(e) {
     e.preventDefault()
 
     var locationInput = $("#location").val()
@@ -180,8 +214,6 @@ export function handleSearchButton(e) {
     // callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
 
-
-
 // stores itineraryList in localStorage
 localStorage.setItem('itineraryList', JSON.stringify(itineraryList));
 // retrieves itineraryList from localStorage
@@ -198,4 +230,3 @@ function clearSection() {
 clearSection('mySection');
 
 // callOpenAIAPI(createPromptForOpenAIAPI())
-
