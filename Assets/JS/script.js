@@ -71,6 +71,7 @@ function callEventAPI(event, itineraryInputs) {
         return response.json();
     })
     .then((data) => {
+        console.log(data)
         var firstEventResult = data.events_results[0]
         console.log(firstEventResult)
         realEvents.push(firstEventResult)
@@ -171,7 +172,7 @@ function handleSearchButton(e) {
     for (var event of itineraryList) {
         var firstEventResult = callEventAPI(event, itineraryInputs)
     }
-//     callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
+    // callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
 
 
