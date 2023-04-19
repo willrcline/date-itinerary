@@ -193,6 +193,4 @@ function clearSection() {
 }
 clearSection('mySection');
 
-
 // callOpenAIAPI(createPromptForOpenAIAPI())
-
