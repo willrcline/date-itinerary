@@ -127,7 +127,6 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     return prompt
 }
 
-
 $("#itinerary-btn").on("click", handleAddToItineraryButton);
 $("#search-btn").on("click", handleSearchButton);
 
@@ -178,11 +177,13 @@ function handleSearchButton(e) {
 }
 
 
+
+
 // stores itineraryList in localStorage
-localStorage.setItem('itineraryList', JSON.stringify(itineraryList));
+localStorage.setItem('itinerary-list', JSON.stringify(itineraryList));
 
 // retrieves itineraryList from localStorage
-var storedItineraryList = localStorage.getItem('itineraryList');
+var storedItineraryList = localStorage.getItem('itinerary-list');
 if (storedItineraryList) {
     itineraryList = JSON.parse(storedItineraryList);
 }
@@ -198,5 +199,4 @@ function clearSection() {
 
 
 clearSection('mySection');
-
 
