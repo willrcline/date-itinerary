@@ -2,34 +2,44 @@ import { OpenAIAPIKey } from "./config.js"
 
 var itineraryList = []
 var realEvents = []
+var subEvent
 
 var eventTypeSelect = document.getElementById("event-type");
 var cuisineDropdown = document.getElementById("cuisine-dropdown");
 var sportTypeDropdown = document.getElementById("sport-type-dropdown");
 var musicGenreDropdown = document.getElementById("music-genre-dropdown");
 var movieGenreDropdown = document.getElementById("movie-genre-dropdown");
+var cuisineSelect = $("#cuisine-select");
+var musicGenreSelect = $("#music-genre-select");
+var sportingSelect = $("#sporting-select");
+var movieGenreSelect = $("#movie-genre-select");
 
 eventTypeSelect.addEventListener("change", function () {
+
     if (eventTypeSelect.value == "Food & Drinks") {
         cuisineDropdown.style.display = "block";
         sportTypeDropdown.style.display = "none";
         musicGenreDropdown.style.display = "none";
         movieGenreDropdown.style.display = "none";
+        subEvent = cuisineSelect.val()
     } else if (eventTypeSelect.value == "Music Events") {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "none";
         musicGenreDropdown.style.display = "block";
         movieGenreDropdown.style.display = "none";
+        subEvent = musicGenreSelect.val()
     } else if (eventTypeSelect.value == "Sporting Events") {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "block";
         musicGenreDropdown.style.display = "none";
         movieGenreDropdown.style.display = "none";
+        subEvent = sportingSelect.val()
     } else if (eventTypeSelect.value == "Movie Theatre") {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "none";
         musicGenreDropdown.style.display = "none";
         movieGenreDropdown.style.display = "block";
+        subEvent = movieGenreSelect.val()
     } else {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "none";
@@ -49,7 +59,6 @@ eventTypeSelect.addEventListener("change", function () {
 function callEventAPI(event, itineraryInputs) {
     const API_KEY = 'b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837';
     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
-    console.log(QUERY)
     const ENGINE = 'google_events';
     const HL = 'en';
     const GL = 'us';
@@ -65,9 +74,12 @@ function callEventAPI(event, itineraryInputs) {
             return response.json();
         })
         .then((data) => {
-            console.log(data["events_results"]);
-            return data["event_results"][0]
-            // Process the data here, e.g., display search results on the page
+            var firstEventResult = data.events_results[0]
+            console.log(firstEventResult)
+            realEvents.push(firstEventResult)
+            return firstEventResult
+            //.description
+            //.title
         })
         .catch((error) => {
             console.error('There was a problem with the fetch operation:', error);
@@ -93,7 +105,6 @@ function callOpenAIAPI(prompt) {
     })
         .then((response) => response.json())
         .then((result) => {
-            console.log(result)
             var promptResponse = result.choices[0].message.content
             var pEl = $('#generate-itinerary')
             pEl.text(promptResponse)
@@ -114,7 +125,6 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
     for (var i = 0; i < realEvents.length; i++) {
         var realEvent = realEvents[i];
-        console.log("realEvent: " + realEvent)
         //TODO: Change the wording to not say event 1 and event 2
         prompt += "Event title: " + realEvent.title + "\n" + "Event Venue: " + realEvent.venue.name + "\n" + "Event Description: " + realEvent.description + "\n"
     }
@@ -123,38 +133,30 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     6:00 PM - Start the night" + "\n\
     Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature."
 
-    console.log(prompt)
     return prompt
 }
 
-
-$("#itinerary-btn").on("click", handleAddToItineraryButton);
-$("#search-btn").on("click", handleSearchButton);
-
+$("#itinerary-btn").on("click", handleAddToItineraryButton)
+$("#search-btn").on("click", handleSearchButton)
 function handleAddToItineraryButton() {
-    //.push input to list 
-    var eventTypeInput = $("#event-type").val();
-
+    //.push input to list
+    var eventTypeInput = $('#event-type').val();
     if (!itineraryList.includes(eventTypeInput)) {
-        itineraryList.push(eventTypeInput);
+        itineraryList.push(subEvent);
         //append to screen
-        //clearSection("#itinerary-list")
+        //clearSection(“#itinerary-list”)
     }
-
     renderItineraryList();
 }
-
 function renderItineraryList() {
-    var itineraryListEl = $("#itinerary-list");
+    var itineraryListEl = $("#itinerary-list")
     itineraryListEl.empty();
-
     for (var itineraryItem of itineraryList) {
-        var itemEl = $("<li>");
+        var itemEl = $("<li>")
         itemEl.text(itineraryItem);
         itineraryListEl.append(itemEl);
     }
 }
-
 
 function handleSearchButton(e) {
     e.preventDefault()
@@ -170,32 +172,27 @@ function handleSearchButton(e) {
 
     for (var event of itineraryList) {
         var firstEventResult = callEventAPI(event, itineraryInputs)
-        realEvents.push(firstEventResult)
     }
-    console.log(realEvents)
-
-    callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput, timeOfDayInput))
+    //     callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
+
 
 
 // stores itineraryList in localStorage
 localStorage.setItem('itineraryList', JSON.stringify(itineraryList));
-
 // retrieves itineraryList from localStorage
 var storedItineraryList = localStorage.getItem('itineraryList');
 if (storedItineraryList) {
     itineraryList = JSON.parse(storedItineraryList);
 }
+function clearSection() {
+    var sectionElement = document.getElementById('mySection');
+    if (sectionElement) {
+        sectionElement.innerHTML = '';
+    }
+}
+clearSection('mySection');
 
 
-
-// function clearSection() {
-//     var sectionElement = document.getElementById('mySection');
-//     if (sectionElement) {
-//         sectionElement.innerHTML = '';
-//     }
-// }
-
-
-// clearSection('mySection');
+// callOpenAIAPI(createPromptForOpenAIAPI())
 
