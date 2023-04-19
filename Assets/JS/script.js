@@ -1,7 +1,7 @@
 import { OpenAIAPIKey } from "./config.js"
 
-var itineraryList = []
-var realEvents = []
+export var itineraryList = []
+export var realEvents = []
 var subEvent
 
 var eventTypeSelect = document.getElementById("event-type");
@@ -56,7 +56,7 @@ eventTypeSelect.addEventListener("change", function () {
 //  -d gl="us" \
 //  -d api_key="b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837"
 
-function callEventAPI(event, itineraryInputs) {
+export function callEventAPI(event, itineraryInputs) {
     const API_KEY = 'b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837';
     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
     const ENGINE = 'google_events';
@@ -67,26 +67,27 @@ function callEventAPI(event, itineraryInputs) {
     const url = `https://serpapi.com/search.json?api_key=${API_KEY}&engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     fetch(proxyUrl + url)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            var firstEventResult = data.events_results[0]
-            console.log(firstEventResult)
-            realEvents.push(firstEventResult)
-            return firstEventResult
-            //.description
-            //.title
-        })
-        .catch((error) => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+    .then((response) => {
+        if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((data) => {
+        var firstEventResult = data.events_results[0]
+        console.log(firstEventResult)
+        realEvents.push(firstEventResult)
+        callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
+        return firstEventResult
+        //.description
+        //.title
+    })
+    .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 }
 
-function callOpenAIAPI(prompt) {
+export function callOpenAIAPI(prompt) {
     const url = 'https://api.openai.com/v1/chat/completions';
 
     const data = {
@@ -106,6 +107,7 @@ function callOpenAIAPI(prompt) {
         .then((response) => response.json())
         .then((result) => {
             var promptResponse = result.choices[0].message.content
+            console.log(promptResponse)
             var pEl = $('#generate-itinerary')
             pEl.text(promptResponse)
         })
@@ -115,7 +117,7 @@ function callOpenAIAPI(prompt) {
 }
 
 
-function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
+export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     var prompt =
         "The following is an itinerary for a very romantic date night with the user's partner for tonight." + "\n\
     Date Location: " + location + "\n\
@@ -125,12 +127,11 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
     for (var i = 0; i < realEvents.length; i++) {
         var realEvent = realEvents[i];
-        //TODO: Change the wording to not say event 1 and event 2
         prompt += "Event title: " + realEvent.title + "\n" + "Event Venue: " + realEvent.venue.name + "\n" + "Event Description: " + realEvent.description + "\n"
     }
 
     prompt += "The itinerary is displayed in a format like this:" + "\n\
-    6:00 PM - Start the night" + "\n\
+    6:00 PM - Start the night" + "\n\n\
     Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature."
 
     return prompt
@@ -142,6 +143,7 @@ function handleAddToItineraryButton() {
     //.push input to list
     var eventTypeInput = $('#event-type').val();
     if (!itineraryList.includes(eventTypeInput)) {
+        //ToDo: instead of just pushing subEvent to a list, append both the event and sub event concatenated to that list like "subEvent + " " + event" (ie "baseball sporting events")
         itineraryList.push(subEvent);
         //append to screen
         //clearSection(“#itinerary-list”)
@@ -158,7 +160,7 @@ function renderItineraryList() {
     }
 }
 
-function handleSearchButton(e) {
+export function handleSearchButton(e) {
     e.preventDefault()
 
     var locationInput = $("#location").val()
@@ -173,7 +175,8 @@ function handleSearchButton(e) {
     for (var event of itineraryList) {
         var firstEventResult = callEventAPI(event, itineraryInputs)
     }
-    //     callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
+
+    // callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
 
 
