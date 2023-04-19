@@ -108,8 +108,9 @@ export function callOpenAIAPI(prompt) {
         .then((result) => {
             var promptResponse = result.choices[0].message.content
             console.log(promptResponse)
-            var pEl = $('#generate-itinerary')
-            pEl.text(promptResponse)
+            // var pEl = $('#generate-itinerary')
+            var pEl = document.querySelector("#generate-itinerary")
+            pEl.innerHTML = promptResponse
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -150,7 +151,7 @@ function handleAddToItineraryButton() {
     }
     renderItineraryList();
 }
-function renderItineraryList() {
+export function renderItineraryList() {
     var itineraryListEl = $("#itinerary-list")
     itineraryListEl.empty();
     for (var itineraryItem of itineraryList) {

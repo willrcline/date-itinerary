@@ -12,6 +12,6 @@ function testAPICalls() {
     console.log(firstEventResult)
 }
 
-// testAPICalls()
+testAPICalls()
 
 // callOpenAIAPI("the following is a list of 3 random sporting events: ")
