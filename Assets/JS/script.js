@@ -4,14 +4,15 @@ var itineraryList = []
 var realEvents = []
 var subEvent
 
-var specificEvent = document.getElementById("specific-event");
 var eventTypeSelect = document.getElementById("event-type");
-var cuisineSelect = document.getElementById("cuisine-select");
 var cuisineDropdown = document.getElementById("cuisine-dropdown");
 var sportTypeDropdown = document.getElementById("sport-type-dropdown");
-var musicGenreSelect = $("#music-genre-select");
 var musicGenreDropdown = document.getElementById("music-genre-dropdown");
 var movieGenreDropdown = document.getElementById("movie-genre-dropdown");
+var cuisineSelect = $("#cuisine-select");
+var musicGenreSelect = $("#music-genre-select");
+var sportingSelect = $("#sporting-select");
+var movieGenreSelect = $("#movie-genre-select");
 
 eventTypeSelect.addEventListener("change", function () {
 
@@ -32,11 +33,13 @@ eventTypeSelect.addEventListener("change", function () {
         sportTypeDropdown.style.display = "block";
         musicGenreDropdown.style.display = "none";
         movieGenreDropdown.style.display = "none";
+        subEvent = sportingSelect.val()
     } else if (eventTypeSelect.value == "Movie Theatre") {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "none";
         musicGenreDropdown.style.display = "none";
         movieGenreDropdown.style.display = "block";
+        subEvent = movieGenreSelect.val()
     } else {
         cuisineDropdown.style.display = "none";
         sportTypeDropdown.style.display = "none";
@@ -82,40 +85,39 @@ function callEventAPI(event, itineraryInputs) {
     .catch((error) => {
         console.error('There was a problem with the fetch operation:', error);
     });
-}
 
 function callOpenAIAPI(prompt) {
     const url = 'https://api.openai.com/v1/chat/completions';
 
     const data = {
-    model: 'gpt-3.5-turbo',
-    messages: [{ role: 'user', content: prompt }],
-    temperature: 0.7,
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.7,
     };
 
     fetch(url, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OpenAIAPIKey}`,
-    },
-    body: JSON.stringify(data),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${OpenAIAPIKey}`,
+        },
+        body: JSON.stringify(data),
     })
-    .then((response) => response.json())
-    .then((result) => {
-        var promptResponse = result.choices[0].message.content
-        var pEl = $('#generate-itinerary')
-        pEl.text(promptResponse)
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+        .then((response) => response.json())
+        .then((result) => {
+            var promptResponse = result.choices[0].message.content
+            var pEl = $('#generate-itinerary')
+            pEl.text(promptResponse)
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 
 function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
-    var prompt = 
-    "The following is an itinerary for a very romantic date night with the user's partner for tonight." + "\n\
+    var prompt =
+        "The following is an itinerary for a very romantic date night with the user's partner for tonight." + "\n\
     Date Location: " + location + "\n\
     Date Calendar Day: " + calendarDay + "\n\
     Time of Day: " + timeOfDay + "\n\
@@ -129,33 +131,32 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
     prompt += "The itinerary is displayed in a format like this:" + "\n\
     6:00 PM - Start the night" + "\n\
-    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature." 
-    
+    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature."
+
     return prompt
 }
 
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
 $("#search-btn").on("click", handleSearchButton)
-
 function handleAddToItineraryButton() {
     //.push input to list
-    itineraryList.push(subEvent)
-
-    //append to screen
-    //clearSection("#itinerary-list")
-    renderItineraryList()
+    var eventTypeInput = $('#event-type').val();
+    if (!itineraryList.includes(eventTypeInput)) {
+        itineraryList.push(subEvent);
+        //append to screen
+        //clearSection(“#itinerary-list”)
+    }
+    renderItineraryList();
 }
-
 function renderItineraryList() {
     var itineraryListEl = $("#itinerary-list")
-
+    itineraryListEl.empty();
     for (var itineraryItem of itineraryList) {
         var itemEl = $("<li>")
-        itemEl.text(itineraryItem)
-        itineraryListEl.append(itemEl)
+            itemEl.text(itineraryItem);
+            itineraryListEl.append(itemEl);
     }
 }
-
 
 function handleSearchButton(e) {
     e.preventDefault()
@@ -172,37 +173,26 @@ function handleSearchButton(e) {
     for (var event of itineraryList) {
         var firstEventResult = callEventAPI(event, itineraryInputs)
     }
+
     // callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
 
 
 
-//TODO: itinerary to local storage
-// function saveItinerary(itinerary) {
-//     localStorage.setItem('itinerary', JSON.stringify(itinerary));
-// }
-
-//TODO:itinerary from local storage
-// function getItinerary() {
-//     const itineraryString = localStorage.getItem('itinerary');
-//     return itineraryString ? JSON.parse(itineraryString) : null;
-// }
-
-//TODO: helper function for date and time formatting
-// function formatDate(date) {
-    // format date in your desired format
-// }
-
-// function formatTime(time) {
-    // format time in your desired format
-// }
-
-//TODO: clear section of page
-// function clearSection(sectionId) {
-//     const section = document.getElementById(sectionId);
-//     section.innerHTML = '';
-// }
-
+// stores itineraryList in localStorage
+localStorage.setItem('itineraryList', JSON.stringify(itineraryList));
+// retrieves itineraryList from localStorage
+var storedItineraryList = localStorage.getItem('itineraryList');
+if (storedItineraryList) {
+    itineraryList = JSON.parse(storedItineraryList);
+}
+function clearSection() {
+    var sectionElement = document.getElementById('mySection');
+    if (sectionElement) {
+        sectionElement.innerHTML = '';
+    }
+}
+clearSection('mySection');
 
 // callOpenAIAPI(createPromptForOpenAIAPI())
 
