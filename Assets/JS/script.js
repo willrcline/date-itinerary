@@ -138,26 +138,25 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
 $("#search-btn").on("click", handleSearchButton)
-
 function handleAddToItineraryButton() {
     //.push input to list
-    itineraryList.push(subEvent)
-
-    //append to screen
-    //clearSection("#itinerary-list")
-    renderItineraryList()
+    var eventTypeInput = $('#event-type').val();
+    if (!itineraryList.includes(eventTypeInput)) {
+        itineraryList.push(subEvent);
+        //append to screen
+        //clearSection(“#itinerary-list”)
+    }
+    renderItineraryList();
 }
-
 function renderItineraryList() {
     var itineraryListEl = $("#itinerary-list")
-
+    itineraryListEl.empty();
     for (var itineraryItem of itineraryList) {
         var itemEl = $("<li>")
-        itemEl.text(itineraryItem)
-        itineraryListEl.append(itemEl)
+            itemEl.text(itineraryItem);
+            itineraryListEl.append(itemEl);
     }
 }
-
 
 function handleSearchButton(e) {
     e.preventDefault()
@@ -179,32 +178,20 @@ function handleSearchButton(e) {
 
 
 
-//TODO: itinerary to local storage
-// function saveItinerary(itinerary) {
-//     localStorage.setItem('itinerary', JSON.stringify(itinerary));
-// }
-
-//TODO:itinerary from local storage
-// function getItinerary() {
-//     const itineraryString = localStorage.getItem('itinerary');
-//     return itineraryString ? JSON.parse(itineraryString) : null;
-// }
-
-//TODO: helper function for date and time formatting
-// function formatDate(date) {
-    // format date in your desired format
-// }
-
-// function formatTime(time) {
-    // format time in your desired format
-// }
-
-//TODO: clear section of page
-// function clearSection(sectionId) {
-//     const section = document.getElementById(sectionId);
-//     section.innerHTML = '';
-// }
-
+// stores itineraryList in localStorage
+localStorage.setItem('itineraryList', JSON.stringify(itineraryList));
+// retrieves itineraryList from localStorage
+var storedItineraryList = localStorage.getItem('itineraryList');
+if (storedItineraryList) {
+    itineraryList = JSON.parse(storedItineraryList);
+}
+function clearSection() {
+    var sectionElement = document.getElementById('mySection');
+    if (sectionElement) {
+        sectionElement.innerHTML = '';
+    }
+}
+clearSection('mySection');
 
 // callOpenAIAPI(createPromptForOpenAIAPI())
 
