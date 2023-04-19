@@ -67,57 +67,57 @@ function callEventAPI(event, itineraryInputs) {
     const url = `https://serpapi.com/search.json?api_key=${API_KEY}&engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     fetch(proxyUrl + url)
-    .then((response) => {
-        if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then((data) => {
-        var firstEventResult = data.events_results[0]
-        console.log(firstEventResult)
-        realEvents.push(firstEventResult)
-        return firstEventResult
-        //.description
-        //.title
-    })
-    .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error);
-    });
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            var firstEventResult = data.events_results[0]
+            console.log(firstEventResult)
+            realEvents.push(firstEventResult)
+            return firstEventResult
+            //.description
+            //.title
+        })
+        .catch((error) => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
 }
 
 function callOpenAIAPI(prompt) {
     const url = 'https://api.openai.com/v1/chat/completions';
 
     const data = {
-    model: 'gpt-3.5-turbo',
-    messages: [{ role: 'user', content: prompt }],
-    temperature: 0.7,
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.7,
     };
 
     fetch(url, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OpenAIAPIKey}`,
-    },
-    body: JSON.stringify(data),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${OpenAIAPIKey}`,
+        },
+        body: JSON.stringify(data),
     })
-    .then((response) => response.json())
-    .then((result) => {
-        var promptResponse = result.choices[0].message.content
-        var pEl = $('#generate-itinerary')
-        pEl.text(promptResponse)
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+        .then((response) => response.json())
+        .then((result) => {
+            var promptResponse = result.choices[0].message.content
+            var pEl = $('#generate-itinerary')
+            pEl.text(promptResponse)
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 
 function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
-    var prompt = 
-    "The following is an itinerary for a very romantic date night with the user's partner for tonight." + "\n\
+    var prompt =
+        "The following is an itinerary for a very romantic date night with the user's partner for tonight." + "\n\
     Date Location: " + location + "\n\
     Date Calendar Day: " + calendarDay + "\n\
     Time of Day: " + timeOfDay + "\n\
@@ -131,8 +131,8 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
     prompt += "The itinerary is displayed in a format like this:" + "\n\
     6:00 PM - Start the night" + "\n\
-    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature." 
-    
+    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature."
+
     return prompt
 }
 
@@ -174,7 +174,7 @@ function handleSearchButton(e) {
     for (var event of itineraryList) {
         var firstEventResult = callEventAPI(event, itineraryInputs)
     }
-//     callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
+    //     callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
 
 
