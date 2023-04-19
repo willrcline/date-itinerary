@@ -15,7 +15,6 @@ var sportingSelect = $("#sporting-select");
 var movieGenreSelect = $("#movie-genre-select");
 
 eventTypeSelect.addEventListener("change", function () {
-
     if (eventTypeSelect.value == "Food & Drinks") {
         cuisineDropdown.style.display = "block";
         sportTypeDropdown.style.display = "none";
@@ -47,6 +46,23 @@ eventTypeSelect.addEventListener("change", function () {
         movieGenreDropdown.style.display = "none";
     }
 });
+
+cuisineSelect.on("change", function () {
+    subEvent = cuisineSelect.val()
+});
+
+musicGenreSelect.on("change", function () {
+    subEvent = musicGenreSelect.val()
+});
+
+sportingSelect.on("change", function () {
+    subEvent = sportingSelect.val()
+});
+
+movieGenreSelect.on("change", function () {
+    subEvent = movieGenreSelect.val()
+});
+
 
 
 // curl --get https://serpapi.com/search \
@@ -138,25 +154,59 @@ function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
 $("#search-btn").on("click", handleSearchButton)
+
 function handleAddToItineraryButton() {
     //.push input to list
     var eventTypeInput = $('#event-type').val();
     if (!itineraryList.includes(eventTypeInput)) {
-        itineraryList.push(subEvent);
+        itineraryList.push(subEvent + ", " + eventTypeInput);
         //append to screen
         //clearSection(“#itinerary-list”)
     }
     renderItineraryList();
 }
+// function renderItineraryList() {
+//     var itineraryListEl = $("#itinerary-list")
+//     itineraryListEl.empty();
+//     for (var itineraryItem of itineraryList) {
+//         var itemEl = $("<li>")
+//             itemEl.text(itineraryItem);
+//             itineraryListEl.append(itemEl);
+
+//         // Add remove button
+//         var removeBtn = $("<button>");
+//         removeBtn.text("Remove");
+//         removeBtn.attr("data-index", i);
+//         removeBtn.addClass("remove-btn");
+//         itemEl.append(removeBtn);
+
+//         itineraryListEl.append(itemEl);
+//     }
+// }
+
 function renderItineraryList() {
     var itineraryListEl = $("#itinerary-list")
     itineraryListEl.empty();
     for (var itineraryItem of itineraryList) {
-        var itemEl = $("<li>")
-            itemEl.text(itineraryItem);
-            itineraryListEl.append(itemEl);
+        var itemEl = $("<li>");
+        var deleteBtn = $("<button>");
+        deleteBtn.text("X");
+        deleteBtn.addClass("delete-btn");
+        deleteBtn.click(function () {
+            $(this).parent().remove();
+        });
+        itemEl.text(itineraryItem);
+        itemEl.append(deleteBtn);
+        itineraryListEl.append(itemEl);
     }
 }
+
+$(document).on("click", ".remove-btn", function () {
+    var index = $(this).attr("data-index");
+    itineraryList.splice(index, 1);
+    renderItineraryList();
+});
+
 
 function handleSearchButton(e) {
     e.preventDefault()
@@ -194,4 +244,3 @@ function clearSection() {
 clearSection('mySection');
 
 // callOpenAIAPI(createPromptForOpenAIAPI())
-
