@@ -28,12 +28,6 @@
 
     </div>
     <div class="top-bar-right">
-      <ul class="menu" id="navbar-list">
-        <li><a href="#">One</a></li>
-        <li><a href="#">Two</a></li>
-        <li><a href="#">Three</a></li>
-        <li><a href="#">Four</a></li>
-      </ul>
     </div>
   </div>
   <!-- End Top Bar -->
@@ -97,7 +91,6 @@
                   <option>Music Events</option> 
                   <option>Sporting Events</option>
                   <option>Movie Theatre</option>
-                  <option>Hotels</option>
                 </select>
               </label>
             </div>
@@ -107,9 +100,12 @@
                 <select id="cuisine-select" name="cuisine-dropdown" type="text">
                   <option>Italian Cuisine</option>
                   <option>French Cuisine</option>
+                  <option>Mediterranean Cuisine</option>
+                  <option>American Cuisine</option>
                   <option>Chinese Cuisine</option>
                   <option>Japanese Cuisine</option>
-                  <option>Vegetarian Options</option>
+                  <option>Korean Cuisine</option>
+                  <option>Vegetarian Cuisine</option>
                 </select>
               </label>
             </div>
@@ -127,21 +123,21 @@
 
             <div id="sport-type-dropdown" style="display: none;">
               <label for="sport-type">Sport Type:</label>
-              <select id="sport-type" name="sport-type">
-                <option value="basketball">Basketball</option>
-                <option value="football">Football</option>
-                <option value="baseball">Baseball</option>
+              <select id="specific-event" name="sport-type">
+                <option value="basketball">Basketball Game</option>
+                <option value="football">Football Game</option>
+                <option value="baseball">Baseball Game</option>
               </select>
             </div>
 
             <div id="movie-genre-dropdown" style="display: none;">
               <label for="movie-genre">Movie Genre:</label>
-              <select id="movie-genre" name="movie-genre">
-                <option value="action">Action</option>
-                <option value="comedy">Comedy</option>
-                <option value="drama">Drama</option>
-                <option value="romance">Romance</option>
-                <option value="horror">Horror</option>
+              <select id="specific-event" name="movie-genre">
+                <option value="action">Action Movie</option>
+                <option value="comedy">Comedy Movie</option>
+                <option value="drama">Drama Movie</option>
+                <option value="romance">Romance Movie</option>
+                <option value="horror">Horror Movie</option>
               </select>
             </div>
 
@@ -150,7 +146,7 @@
             </button>
           </form>
         </div>
-        <div class="translucent-form-overlay">
+        <div class="translucent-form-overlay" id="events-container">
           <h4>Desired Events</h4>
           <ul id="itinerary-list">
           </ul>

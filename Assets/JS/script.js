@@ -4,6 +4,7 @@ var itineraryList = []
 var realEvents = []
 var subEvent
 
+var specificEvent = document.getElementById("specific-event");
 var eventTypeSelect = document.getElementById("event-type");
 var cuisineSelect = document.getElementById("cuisine-select");
 var cuisineDropdown = document.getElementById("cuisine-dropdown");
@@ -136,8 +137,9 @@ $("#itinerary-btn").on("click", handleAddToItineraryButton)
 $("#search-btn").on("click", handleSearchButton)
 
 function handleAddToItineraryButton() {
-    //.push input to list 
+    //.push input to list
     itineraryList.push(subEvent)
+
     //append to screen
     //clearSection("#itinerary-list")
     renderItineraryList()
