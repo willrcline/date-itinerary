@@ -93,8 +93,6 @@ export function callEventAPI(event, itineraryInputs) {
         var firstEventResult = data.events_results[0]
         console.log(firstEventResult)
         realEvents.push(firstEventResult)
-        callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
-        renderEventDetails()
         return firstEventResult
         //.description
         //.title
@@ -102,6 +100,22 @@ export function callEventAPI(event, itineraryInputs) {
     .catch((error) => {
         console.error('There was a problem with the fetch operation:', error);
     });
+}
+
+export function renderEventDetails() {
+    console.log(realEvents)
+    for (var event in realEvents) {
+        console.log(event.title)
+        var titleLi = $("<li>").text(event.title)
+        var a = $('<a>', { href: event.link, text: event.title });
+
+        titleLi.append(a);
+        var ul = $("<ul>")
+        ul.append(titleLi);
+
+        $("#box-of-details-for-all-events").append(ul)
+
+    }
 }
 
 export function callOpenAIAPI(prompt) {
@@ -145,7 +159,14 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
     for (var i = 0; i < realEvents.length; i++) {
         var realEvent = realEvents[i];
-        prompt += "Event title: " + realEvent.title + "\n" + "Event Venue: " + realEvent.venue.name + "\n" + "Event Description: " + realEvent.description + "\n"
+        prompt += "Event Type: " + itineraryList[i] + "\n"
+        + "Event title: " + realEvent.title + "\n"
+        if (realEvent.venue.name) {
+            prompt += "Event Venue: " + realEvent.venue.name + "\n" 
+        }
+        if (realEvent.description) {
+            prompt += "Event Description: " + realEvent.description + "\n"
+        }
     }
 
     prompt += "The itinerary is displayed in a format like this:" + "\n\
@@ -153,26 +174,6 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature."
 
     return prompt
-}
-
-export function renderEventDetails(realEvents) {
-    console.log(realEvents)
-    for (var event in realEvents) {
-        console.log(event.title)
-        var titleLi = $("<li>").text(event.title)
-        var a = $('<a>', { href: event.link, text: event.title });
-        var venueLi = $('<li>', { text: 'Venue: ' + event.address });
-        var startTimeLi = $('<li>', { text: 'Start Time: ' + event.when })
-
-        titleLi.append(a);
-        var ul = $("<ul>")
-        ul.append(titleLi);
-        ul.append(venueLi);
-        ul.append(startTimeLi)
-
-        $("#box-of-details-for-all-events").append(ul)
-
-    }
 }
 
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
@@ -201,6 +202,11 @@ function renderItineraryList() {
         deleteBtn.text("X");
         deleteBtn.addClass("delete-btn");
         deleteBtn.click(function () {
+            const valueToFind = ($(this).parent().text()).slice(0, -1)
+            const index = itineraryList.indexOf(valueToFind);
+            if (index !== -1) {
+                itineraryList.splice(index, 1);
+              }
             $(this).parent().remove();
         });
         itemEl.text(itineraryItem);
@@ -215,7 +221,7 @@ $(document).on("click", ".remove-btn", function () {
     renderItineraryList();
 });
 
-function handleSearchButton(e) {
+export function handleSearchButton(e) {
     e.preventDefault()
 
     var locationInput = $("#location").val()
@@ -230,6 +236,12 @@ function handleSearchButton(e) {
     for (var event of itineraryList) {
         var firstEventResult = callEventAPI(event, itineraryInputs)
     }
+
+    setTimeout(function() {
+        callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
+        renderEventDetails()
+    }, 8000)
+    
 
     // callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
