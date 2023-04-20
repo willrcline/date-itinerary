@@ -1,3 +1,5 @@
+/* ToDo: make design responsive for phone */
+
 * {
 font-family: 'Catamaran',
 sans-serif;
@@ -118,7 +120,6 @@ body {
 }
 
 .transparent-text-box:before {
-    content: "";
     display: block;
     position: absolute;
     top: 0;
