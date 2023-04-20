@@ -94,28 +94,7 @@ export function callEventAPI(event, itineraryInputs) {
         })
         .catch((error) => {
             console.error('There was a problem with the fetch operation:', error);
-        });
-
-    .then((response) => {
-        if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then((data) => {
-        console.log(data)
-        var firstEventResult = data.events_results[0]
-        realEvents.push(firstEventResult)
-        console.log("CallEventAPI")
-        console.log(firstEventResult)
-        console.log(realEvents)
-        return
-        //.description
-        //.title
-    })
-    .catch((error) => {
-        console.error('There was a problem with the fetch operation:', error);
-    });
+        })
 }
 
 export function renderEventDetails() {
@@ -124,8 +103,6 @@ export function renderEventDetails() {
         console.log("RenderEventDetails")
         console.log(event)
         var titleLi = $("<li>")
-        //ToDo: make this link clickable (for some reason it's not even though the a tag is in there (you can check in inspect tool))
-
         var a = $('<a>', { href: event.link, text: event.title, target: "_blank"});
 
         titleLi.append(a);
@@ -271,15 +248,12 @@ export function handleSearchButton(e) {
         callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
         renderEventDetails();
 
-        searchBtn.removeClass('loading');
-        searchBtn.find('button').attr('disabled', false);
-        searchBtn.find('button').text(originalText);
-        searchBtn.find('.search-spinner').hide();
-
+        var searchBtnDiv = $("#search-btn-div")
+        searchBtnDiv.removeClass('loading');
+        searchBtnDiv.find('button').attr('disabled', false);
+        searchBtnDiv.find('button').text("Search");
+        searchBtnDiv.find('.search-spinner').hide();
     }, 8000);
-}
-
-     callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
 }
 
 

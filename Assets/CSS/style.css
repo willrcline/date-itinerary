@@ -146,10 +146,14 @@ body {
 }
 
 #search-btn {
-    margin-top: 20px;
+    background-color: #4CAF50;
+    color: black;
+    display:block;
+    margin: 0 auto;
+    /* margin-top: 20px;
     display: block;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
 #search-btn button {
@@ -168,7 +172,7 @@ body {
 #search-btn button:hover {
     background-color: #368d39;
 }
-
+/* 
 #search-btn .search-spinner {
     display: none;
     margin-left: 10px;
@@ -188,7 +192,7 @@ body {
 
 #search-btn.loading .search-spinner {
     display: inline-block;
-}
+} */
 
 label {
     font-size: 1.3rem;
