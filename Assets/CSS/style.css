@@ -106,8 +106,6 @@ body {
     font-weight: bold;
 }
 
-
-
 .transparent-text-box {
     width: 100%;
     max-width: 800px;
@@ -120,14 +118,12 @@ body {
 }
 
 .transparent-text-box:before {
-    content: "";
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    /* background: url('../images/transparent-texture.png') repeat; */
     opacity: 0.3;
 }
 
@@ -146,9 +142,9 @@ body {
     margin-top: 100px;
 }
 
-.search-btn {
+#search-btn {
     margin-top: 20px;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
 }
@@ -165,6 +161,32 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
+
+#search-btn button:hover {
+    background-color: #368d39;
+}
+
+#search-btn .search-spinner {
+    display: none;
+    margin-left: 10px;
+}
+
+#search-btn .search-spinner i {
+    margin-right: 5px;
+}
+
+#search-btn .search-spinner span {
+    font-size: 16px;
+}
+
+#search-btn.loading button {
+    visibility: hidden;
+}
+
+#search-btn.loading .search-spinner {
+    display: inline-block;
+}
+
 
 label {
     font-size: 1.3rem;

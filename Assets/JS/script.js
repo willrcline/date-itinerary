@@ -271,6 +271,7 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
 
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
 $("#search-btn").on("click", handleSearchButton)
+// $('#loading-btn').on("click", handleLoadingButton)
 
 function handleAddToItineraryButton() {
     //.push input to list
@@ -314,31 +315,42 @@ $(document).on("click", ".remove-btn", function () {
 });
 
 export function handleSearchButton(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    var locationInput = $("#location").val()
-    var dateInput = $("#myDatepicker").val()
-    var timeOfDayInput = $("#timeOfDay").val()
+    var searchBtn = $('#search-btn');
+    var originalText = searchBtn.find('button').text();
+
+    searchBtn.addClass('loading');
+    searchBtn.find('button').attr('disabled', true);
+    searchBtn.find('.search-spinner').show();
+
+    var locationInput = $("#location").val();
+    var dateInput = $("#myDatepicker").val();
+    var timeOfDayInput = $("#timeOfDay").val();
     var itineraryInputs = {
         location: locationInput,
         date: dateInput,
         timeOfDay: timeOfDayInput,
-    }
+    };
 
     for (var event of itineraryList) {
-        callEventAPI(event, itineraryInputs)
+        callEventAPI(event, itineraryInputs);
     }
 
     setTimeout(function () {
-        console.log("Timeout")
-        console.log(realEvents)
+        console.log("Timeout");
+        console.log(realEvents);
         // callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
-        renderEventDetails()
-    }, 8000)
+        renderEventDetails();
 
+        searchBtn.removeClass('loading');
+        searchBtn.find('button').attr('disabled', false);
+        searchBtn.find('button').text(originalText);
+        searchBtn.find('.search-spinner').hide();
 
-    // callOpenAIAPI(createPromptForOpenAIAPI(locationInput, dateInput,timeOfDayInput))
+    }, 8000);
 }
+
 
 // stores itineraryList in localStorage
 localStorage.setItem('itineraryList', JSON.stringify(itineraryList));
