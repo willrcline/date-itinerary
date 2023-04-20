@@ -25,7 +25,3 @@ function testRenderEventDetails() {
 }
 
 // testRenderEventDetails()
-
-
-
-

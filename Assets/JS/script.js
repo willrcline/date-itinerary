@@ -65,7 +65,7 @@ movieGenreSelect.on("change", function () {
 });
 
 export function callEventAPI(event, itineraryInputs) {
-    const API_KEY = 'b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837';
+    const API_KEY = 'bc07e284e5247ec2ea3d7446fa38f0ceb101ac770aae337a65cf001156857018';
     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
     const ENGINE = 'google_events';
     const HL = 'en';
@@ -73,7 +73,8 @@ export function callEventAPI(event, itineraryInputs) {
     const location = itineraryInputs.location
 
     const url = `https://serpapi.com/search.json?api_key=${API_KEY}&engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    // proxyUrl = 'https://api.allorigins.win/raw?url='
     fetch(proxyUrl + url)
         .then((response) => {
             if (!response.ok) {
@@ -102,6 +103,7 @@ export function callEventAPI(event, itineraryInputs) {
         return response.json();
     })
     .then((data) => {
+        console.log(data)
         var firstEventResult = data.events_results[0]
         realEvents.push(firstEventResult)
         console.log("CallEventAPI")
@@ -156,13 +158,28 @@ export function callOpenAIAPI(prompt) {
         .then((result) => {
             var promptResponse = result.choices[0].message.content
             console.log(promptResponse)
-            // var pEl = $('#generate-itinerary')
-            var pEl = document.querySelector("#generate-itinerary")
-            pEl.innerHTML = promptResponse
+            renderItinerary(promptResponse)
         })
         .catch((error) => {
             console.error('Error:', error);
         });
+}
+
+function renderItinerary(promptResponse) {
+    var promptResponseArray = parsePromptResponseIntoAnArray(promptResponse)
+    var ul = $("<ul>")
+    for (var index in promptResponseArray) {
+        var item = promptResponseArray[index]
+        var li = $("<li>").text(item)
+        ul.append(li)
+    }
+    $("#box-of-prompt-response").append(ul)
+}
+
+function parsePromptResponseIntoAnArray(promptResponse) {
+    const delimiter = '<%br>';
+    const array = promptResponse.split(delimiter);
+    return array;
 }
 
 
@@ -181,8 +198,8 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     }
 
     prompt += "The itinerary is displayed in a format like this:" + "\n\
-    6:00 PM - Start the night" + "\n\n\
-    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature."
+    6:00 PM - Start the night" + "<%br>\
+    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature.<%br>"
 
     return prompt
 }
@@ -251,7 +268,7 @@ export function handleSearchButton(e) {
     setTimeout(function () {
         console.log("Timeout");
         console.log(realEvents);
-        // callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
+        callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
         renderEventDetails();
 
         searchBtn.removeClass('loading');
@@ -279,4 +296,5 @@ function clearSection() {
         sectionElement.innerHTML = '';
     }
 }
+
 clearSection('mySection');
