@@ -42,8 +42,6 @@
           <h3>Your Itinerary</h3>
           <div id="box-of-prompt-response"></div>
           <div id="box-of-details-for-all-events"></div>
-        </div>
-
       </div>
     </div>
     <div class="medium-3 columns" data-sticky-container>
@@ -55,6 +53,7 @@
             </div>
             <div class="row columns">
               <label>Location
+                <!-- ToDo: Don't allow them to press buttons without having all the values added -->
                 <input id="location" type="text" name="keyword" placeholder="City, State or Zip">
               </label>
             </div>
@@ -149,13 +148,13 @@
           <h4>Desired Events</h4>
           <ul id="itinerary-list"> </ul>
           <button id="search-btn" class="primary button">Search</button>
-          <!-- <div class="search-btn" id="search-btn">
+          <!-- <div class="search-btn" id="search-btn-div">
             <button>Search</button>
             <div class="search-spinner hidden">
               <i class="fa fa-spinner fa-spin"></i>
               <span>Searching...</span>
-            </div>
-          </div> -->
+            </div> -->
+          </div>
         </div>
       </div>
     </div>
