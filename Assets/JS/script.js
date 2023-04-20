@@ -94,6 +94,7 @@ export function callEventAPI(event, itineraryInputs) {
         console.log(firstEventResult)
         realEvents.push(firstEventResult)
         callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
+        renderEventDetails()
         return firstEventResult
         //.description
         //.title
@@ -152,6 +153,26 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature."
 
     return prompt
+}
+
+export function renderEventDetails(realEvents) {
+    console.log(realEvents)
+    for (var event in realEvents) {
+        console.log(event.title)
+        var titleLi = $("<li>").text(event.title)
+        var a = $('<a>', { href: event.link, text: event.title });
+        var venueLi = $('<li>', { text: 'Venue: ' + event.address });
+        var startTimeLi = $('<li>', { text: 'Start Time: ' + event.when })
+
+        titleLi.append(a);
+        var ul = $("<ul>")
+        ul.append(titleLi);
+        ul.append(venueLi);
+        ul.append(startTimeLi)
+
+        $("#box-of-details-for-all-events").append(ul)
+
+    }
 }
 
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
