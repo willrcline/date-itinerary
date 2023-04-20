@@ -12,41 +12,33 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;700&family=Lora:ital@1&family=Taviraj:wght@100&family=Wallpoet&display=swap"
     rel="stylesheet">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;700&family=Cormorant+Garamond&family=Lora:ital@1&family=Taviraj:wght@100&family=Wallpoet&display=swap"
-      rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;700&family=Cormorant+Garamond&family=Lora:ital@1&family=Taviraj:wght@100&family=Wallpoet&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body class="bg-dark text-light">
 
-  <!-- Start Top Bar -->
-  <div class="top-bar navbar">
-    <div class="top-bar-left">
-      <a href="./past_itineraries.html" target="_blank" class="btn btn-info">Past Itineraries</a>
+<body class="bg-dark text-light main-content">
 
-    </div>
-    <div class="top-bar-right">
-    </div>
-  </div>
-  <!-- End Top Bar -->
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="text-center">Date Planner</h1>
+      <h1 class="text-center animate-character">Date Planner</h1>
     </div>
   </div>
 
   <div class="row" id="content">
-    <div class="medium-8 columns">
+    <div class="medium-8 small-12 columns">
       <div class="blog-post">
         <div class="transparent-text-box">
           <h3>Your Itinerary</h3>
           <div id="box-of-prompt-response"></div>
+          <h6>Event Details</h6>
           <div id="box-of-details-for-all-events"></div>
         </div>
 
       </div>
     </div>
-    <div class="medium-3 columns" data-sticky-container>
+    <div class="medium-3 small-12 columns" data-sticky-container>
       <div class="sticky" data-sticky data-anchor="content">
         <div class="translucent-form-overlay">
           <form>
@@ -87,7 +79,7 @@
                 <select name="type" id="event-type" type="text">
                   <option></option>
                   <option>Food &amp; Drinks</option>
-                  <option>Music Events</option> 
+                  <option>Music Events</option>
                   <option>Sporting Events</option>
                   <option>Movie Theatre</option>
                 </select>
@@ -148,23 +140,21 @@
         <div class="translucent-form-overlay" id="events-container">
           <h4>Desired Events</h4>
           <ul id="itinerary-list"> </ul>
-          <button id="search-btn" class="primary button">Search</button>
-          <!-- <div class="search-btn" id="search-btn">
-            <button>Search</button>
-            <div class="search-spinner hidden">
-              <i class="fa fa-spinner fa-spin"></i>
-              <span>Searching...</span>
-            </div>
-          </div> -->
+          <div id="search-btn-div">
+            <button id="search-btn">Search</button>
+            <div class="search-spinner"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
   </ul>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/js/foundation.min.js" integrity="sha512-xpawU2EKh0HLTLWu8khGczejw+OaWWr+JBcbFBWtRUIkkhuMRZZeEFxY0n51aeC9YF4jxOMzd0pTR9m0tiSvsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/js/foundation.min.js"
+    integrity="sha512-xpawU2EKh0HLTLWu8khGczejw+OaWWr+JBcbFBWtRUIkkhuMRZZeEFxY0n51aeC9YF4jxOMzd0pTR9m0tiSvsQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     $(document).foundation();
   </script>
