@@ -115,6 +115,7 @@ body {
     text-align: center;
     box-sizing: border-box;
     position: relative;
+    font-weight: bold;
 }
 
 .transparent-text-box:before {
@@ -186,7 +187,6 @@ body {
 #search-btn.loading .search-spinner {
     display: inline-block;
 }
-
 
 label {
     font-size: 1.3rem;
