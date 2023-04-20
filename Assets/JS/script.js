@@ -78,6 +78,7 @@ export function callEventAPI(event, itineraryInputs) {
         console.log(firstEventResult)
         realEvents.push(firstEventResult)
         callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
+        renderEventDetails()
         return firstEventResult
         //.description
         //.title
@@ -138,6 +139,26 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     return prompt
 }
 
+export function renderEventDetails(realEvents) {
+    console.log(realEvents)
+    for (var event in realEvents) {
+        console.log(event.title)
+        var titleLi = $("<li>").text(event.title)
+        var a = $('<a>', { href: event.link, text: event.title });
+        var venueLi = $('<li>', { text: 'Venue: ' + event.address });
+        var startTimeLi = $('<li>', { text: 'Start Time: ' + event.when })
+
+        titleLi.append(a);
+        var ul = $("<ul>")
+        ul.append(titleLi);
+        ul.append(venueLi);
+        ul.append(startTimeLi)
+
+        $("#box-of-details-for-all-events").append(ul)
+
+    }
+}
+
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
 $("#search-btn").on("click", handleSearchButton)
 function handleAddToItineraryButton() {
@@ -152,6 +173,7 @@ function handleAddToItineraryButton() {
     renderItineraryList();
 }
 export function renderItineraryList() {
+    //ToDo: instead of just appending the <li>, append something that will have the words and a delete button, and add an event listener to the delete button to remove that event completely.
     var itineraryListEl = $("#itinerary-list")
     itineraryListEl.empty();
     for (var itineraryItem of itineraryList) {
