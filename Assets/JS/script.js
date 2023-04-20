@@ -164,7 +164,6 @@ function handleAddToItineraryButton() {
         itineraryList.push(subEvent + ", " + eventTypeInput);
         
         //ToDo: instead of just pushing subEvent to a list, append both the event and sub event concatenated to that list like "subEvent + " " + event" (ie "baseball sporting events")
-        itineraryList.push(subEvent);
 
         //append to screen
         //clearSection(“#itinerary-list”)
