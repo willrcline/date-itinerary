@@ -8,7 +8,7 @@
 .translucent-form-overlay {
     font-family: 'Catamaran';
     max-width: 400px;
-    width: 100%;
+    width: 40vh;
     background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     color: #000000;
@@ -28,6 +28,7 @@
 h4,
 h3 {
     font-family: 'Catamaran';
+    /* font-weight:bold; */
 }
 
 .translucent-form-overlay input,
@@ -71,41 +72,19 @@ h3 {
     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
-.btn.btn-info {
-    background-color: #202f6b;
-    color: #ffffff;
-}
-
-.btn.btn-info:hover {
-    background-color: #31e1bd;
-}
-
-h1 {
-    color: rgb(255, 255, 255);
-    font-family: 'Cormorant Garamond';
-}
-
-.navbar {
-    background-color: rgba(255, 255, 255, 0.7);
-    /* 80% opacity */
-}
-
-#navbar-list {
-    background-color: transparent;
-}
-
 body {
     background-image: url('../images/shutterstock_96325322.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    opacity: 0.8;
+    opacity: 0.95;
 }
 
 #itinerary-btn {
     width: 50%;
     color: black !important;
     font-weight: bold;
+    border: 1px solid black;
 }
 
 .transparent-text-box {
@@ -127,7 +106,7 @@ body {
     left: 0;
     bottom: 0;
     right: 0;
-    opacity: 0.3;
+    opacity: 0.95;
 }
 
 .transparent-text-box h2 {
@@ -148,51 +127,57 @@ body {
 #search-btn {
     background-color: #4CAF50;
     color: black;
-    display:block;
-    margin: 0 auto;
-    /* margin-top: 20px;
     display: block;
-    justify-content: center;
-    align-items: center; */
-}
-
-#search-btn button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
+    margin: 0;
+    height: 35px;
+    width: 35%;
+    color: black !important;
+    font-weight: bold;
+    margin: 0 auto;
+    border: 1px solid black;
 }
 
 #search-btn button:hover {
     background-color: #368d39;
 }
-/* 
-#search-btn .search-spinner {
+
+.search-spinner {
     display: none;
-    margin-left: 10px;
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-#search-btn .search-spinner i {
-    margin-right: 5px;
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-#search-btn .search-spinner span {
-    font-size: 16px;
+.loading {
+    pointer-events: none;
+    opacity: 0.9;
+    position: relative;
+    
 }
 
-#search-btn.loading button {
-    visibility: hidden;
+.loading .search-spinner {
+    display: block;
+    margin-left: 70px;
+    top:-3px;
+  
 }
-
-#search-btn.loading .search-spinner {
-    display: inline-block;
-} */
 
 label {
     font-size: 1.3rem;
@@ -221,4 +206,77 @@ label {
 #itinerary-list li {
     border: 1px solid black;
     padding: 10px;
+}
+
+/* Tablets - header changes color */
+@media screen and (max-width: 992px) {
+    .header-content {
+        width: 100% !important;
+    }
+    .main-content {
+        width: 100%;
+       
+    }
+}
+
+/* Large smartphones - navbar changes color */
+@media screen and (max-width: 768px) {
+    .header-content {
+        width: 150% !important;
+       
+    }
+    .main-content {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Small smartphones - image placeholders change color */
+@media screen and (max-width: 576px) {
+    .header-content {
+        width: 100% !important;
+    
+    }
+    .main-content {
+        width: 100%;
+        padding: 10px;
+    }
+}
+#box-of-prompt-response, #box-of-details-for-all-events {
+    text-align: left;
+}
+
+.animate-character {
+    text-transform: uppercase;
+    font-family: 'Cormorant Garamond';
+    background-image: linear-gradient(-225deg,
+            #5c41bd 0%,
+            #66be63 29%,
+            #dd5f89 67%,
+            #dad787 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    font-size: 75px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-size: 16px;
 }
