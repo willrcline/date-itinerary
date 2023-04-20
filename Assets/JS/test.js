@@ -2,11 +2,11 @@ import { realEvents, itineraryList, renderEventDetails, createPromptForOpenAIAPI
 
 function testAPICalls() {
   var itineraryList = ['Country Music Events']
-  var itineraryInputs = {
-    location: "San Diego",
-    date: "4/28/2023",
-    timeOfDay: "evening",
-  }
+  var itineraryInputs = [
+    location = "San Diego",
+    date = "4/28/2023",
+    timeOfDay = "evening",
+  ]
 
   var firstEventResult = callEventAPI(itineraryList[0], itineraryInputs)
   console.log(firstEventResult)

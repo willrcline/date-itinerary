@@ -1,9 +1,15 @@
+* {
+    font-family: 'Catamaran',
+        sans-serif;
+}
+
 .translucent-form-overlay {
+    font-family: 'Catamaran';
     max-width: 400px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
-    color: #fefefe;
+    color: #000000;
 }
 
 .translucent-form-overlay .columns.row {
@@ -12,12 +18,19 @@
 
 .translucent-form-overlay h3,
 .translucent-form-overlay label {
-    color: #fefefe;
+    font-family: 'Catamaran';
+    color: #000000;
+
+}
+
+h4,
+h3 {
+    font-family: 'Catamaran';
 }
 
 .translucent-form-overlay input,
 .translucent-form-overlay select {
-    color: #8a8a8a;
+    color: #000000;
 }
 
 .translucent-form-overlay input::-webkit-input-placeholder {
@@ -29,7 +42,7 @@
 }
 
 .translucent-form-overlay input::placeholder {
-    color: #8a8a8a;
+    color: #000000;
 }
 
 .bg-dark {
@@ -37,7 +50,7 @@
 }
 
 .text-light {
-    color: #d9e9e8;
+    color: #000000;
 }
 
 .btn {
@@ -57,21 +70,24 @@
 }
 
 .btn.btn-info {
-    background-color: #1bbc9b;
+    background-color: #202f6b;
     color: #ffffff;
 }
 
 .btn.btn-info:hover {
     background-color: #31e1bd;
 }
+
 h1 {
-    color:white;
+    color: rgb(255, 255, 255);
+    font-family: 'Cormorant Garamond';
 }
 
 .navbar {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.7);
     /* 80% opacity */
 }
+
 #navbar-list {
     background-color: transparent;
 }
@@ -85,14 +101,18 @@ body {
 }
 
 #itinerary-btn {
-    width: 50%
+    width: 50%;
+    color: black !important;
+    font-weight: bold;
 }
+
+
 
 .transparent-text-box {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 50px;
     text-align: center;
     box-sizing: border-box;
@@ -144,4 +164,33 @@ body {
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+label {
+    font-size: 1.3rem;
+}
+
+#generate-itinerary {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
+#itinerary-list {
+    font-weight: bold;
+}
+
+.delete-btn {
+    border: 2px solid rgb(255, 0, 0);
+    border-radius: 50%;
+    background-color: transparent;
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+#itinerary-list li {
+    border: 1px solid black;
+    padding: 10px;
 }
