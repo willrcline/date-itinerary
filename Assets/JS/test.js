@@ -1,3 +1,4 @@
+
 import {realEvents, itineraryList, renderEventDetails, createPromptForOpenAIAPI, callOpenAIAPI, handleSearchButton, callEventAPI } from "./script.js";
 
 function testAPICalls() {
@@ -10,6 +11,7 @@ function testAPICalls() {
 
     var firstEventResult = callEventAPI(itineraryList[0], itineraryInputs)
     console.log(firstEventResult)
+
 }
 
 // testAPICalls()
@@ -18,11 +20,11 @@ function testAPICalls() {
 
 
 function testRenderEventDetails() {
+
     renderEventDetails(realEvents)
 }
 
 // testRenderEventDetails()
-
 
 
 
