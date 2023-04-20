@@ -1,8 +1,8 @@
 /* ToDo: make design responsive for phone */
 
 * {
-font-family: 'Catamaran',
-sans-serif;
+    font-family: 'Catamaran',
+        sans-serif;
 }
 
 .translucent-form-overlay {
@@ -22,10 +22,11 @@ sans-serif;
 .translucent-form-overlay label {
     font-family: 'Catamaran';
     color: #000000;
-    
+
 }
 
-h4, h3 {
+h4,
+h3 {
     font-family: 'Catamaran';
 }
 
@@ -80,7 +81,7 @@ h4, h3 {
 }
 
 h1 {
-    color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
     font-family: 'Cormorant Garamond';
 }
 
@@ -88,6 +89,7 @@ h1 {
     background-color: rgba(255, 255, 255, 0.7);
     /* 80% opacity */
 }
+
 #navbar-list {
     background-color: transparent;
 }
@@ -102,11 +104,9 @@ body {
 
 #itinerary-btn {
     width: 50%;
-    color:black !important;
-    font-weight:bold;
+    color: black !important;
+    font-weight: bold;
 }
-
-
 
 .transparent-text-box {
     width: 100%;
@@ -117,6 +117,7 @@ body {
     text-align: center;
     box-sizing: border-box;
     position: relative;
+    font-weight: bold;
 }
 
 .transparent-text-box:before {
@@ -126,7 +127,6 @@ body {
     left: 0;
     bottom: 0;
     right: 0;
-    /* background: url('../images/transparent-texture.png') repeat; */
     opacity: 0.3;
 }
 
@@ -145,9 +145,9 @@ body {
     margin-top: 100px;
 }
 
-.search-btn {
+#search-btn {
     margin-top: 20px;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
 }
@@ -163,6 +163,31 @@ body {
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+#search-btn button:hover {
+    background-color: #368d39;
+}
+
+#search-btn .search-spinner {
+    display: none;
+    margin-left: 10px;
+}
+
+#search-btn .search-spinner i {
+    margin-right: 5px;
+}
+
+#search-btn .search-spinner span {
+    font-size: 16px;
+}
+
+#search-btn.loading button {
+    visibility: hidden;
+}
+
+#search-btn.loading .search-spinner {
+    display: inline-block;
 }
 
 label {

@@ -12,11 +12,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;700&family=Lora:ital@1&family=Taviraj:wght@100&family=Wallpoet&display=swap"
     rel="stylesheet">
-    
     <link
       href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;700&family=Cormorant+Garamond&family=Lora:ital@1&family=Taviraj:wght@100&family=Wallpoet&display=swap"
       rel="stylesheet">
-      
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body class="bg-dark text-light">
@@ -148,10 +146,13 @@
         </div>
         <div class="translucent-form-overlay" id="events-container">
           <h4>Desired Events</h4>
-          <ul id="itinerary-list">
-          </ul>
+          <ul id="itinerary-list"> </ul>
           <div class="search-btn" id="search-btn">
             <button>Search</button>
+            <div class="search-spinner hidden">
+              <i class="fa fa-spinner fa-spin"></i>
+              <span>Searching...</span>
+            </div>
           </div>
         </div>
       </div>

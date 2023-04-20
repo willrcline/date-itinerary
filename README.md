@@ -37,15 +37,15 @@ After obtaining all the necessary information to plan your date, you may proceed
 
 # Built Utilizing
 
-Foundation: 
+Foundation: https://get.foundation/develop/getting-started.html 
 
-Flatpickr: 
+Flatpickr: https://flatpickr.js.org/
 
-Google Fonts: 
+Google Fonts: https://fonts.google.com/
 
-OpenAI API: 
+OpenAI API: https://platform.openai.com/account/api-keys
 
-Eventbrite API: 
+Serp API: https://serpapi.com/search-api 
 
 
 # Contributors
