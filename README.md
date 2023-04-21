@@ -32,7 +32,6 @@ To start it off, open up the Date Itinerary UI and the following window should a
 
 ![alt text](./Assets/images/Pic%204.png)
 
-
 After obtaining all the necessary information to plan your date, you may proceed to create an entirely new itinerary by inputting a different date, time, and event preferences, which will generate a fresh list of activities. Moreover, while reviewing the new itinerary based on the updated inputs, you may access previously generated itineraries by selecting the 'Past Itinerary' button, which will direct you to a separate page dedicated to previously provided itineraries.
 
 # Built Utilizing
@@ -64,3 +63,26 @@ Roshni Patel: https://github.com/roshniipatel
 
 If you have any suggestions to enhance this website, kindly initiate an email discussion with the repository owners to discuss the proposed changes. The email addresses of the contributors can be found on their respective GitHub pages, accessible via the links provided above.
 
+## Credits
+
+Our group googled many concepts, researched on stackoverflow, youtube and used CHATGPT for some assistance helping to write certain functions. All functions have been rewritten to fit to our particular application.
+
+## Usage
+
+Navigate to the urls located below to begin planning your date! 
+
+[Live Github Page](https://willrcline.github.io/date-itinerary/)
+
+[Repository](https://github.com/willrcline/date-itinerary)
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Chris Kibble
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
