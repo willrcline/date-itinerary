@@ -74,6 +74,10 @@ Navigate to the urls located below to begin planning your date!
 
 [Repository](https://github.com/willrcline/date-itinerary)
 
+## SlideDeck
+
+https://docs.google.com/presentation/d/1bAkHZaI11yeeuPTK3eAofE0Wy1YrxNAHcdPK3es0iTU/edit?usp=sharing
+
 ## License
 
 The MIT License (MIT)
