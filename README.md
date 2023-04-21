@@ -1,7 +1,5 @@
 # Date Itinerary 
 
-## Deployed here
-
 https://willrcline.github.io/date-itinerary/
 
 
