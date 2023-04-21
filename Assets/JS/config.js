@@ -1,1 +1,1 @@
-export var OpenAIAPIKey = "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"
+export var OpenAIAPIKey = "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"

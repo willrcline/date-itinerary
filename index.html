@@ -47,7 +47,7 @@
             </div>
             <div class="row columns">
               <label>Location
-                <input id="location" type="text" name="keyword" placeholder="City, State or Zip">
+                <input id="location" type="text" name="keyword" placeholder="City, State or Zip" required>
               </label>
             </div>
             <div class="row columns">
@@ -65,7 +65,7 @@
             </div>
             <div class="row columns">
               <label>Time of Day
-                <select id="timeOfDay" name="status" type="text">
+                <select id="timeOfDay" name="status" type="text" required>
                   <option></option>
                   <option>Morning</option>
                   <option>Afternoon</option>
@@ -76,7 +76,7 @@
 
             <div class="row columns">
               <label>Type of Event
-                <select name="type" id="event-type" type="text">
+                <select name="type" id="event-type" type="text" required>
                   <option></option>
                   <option>Food &amp; Drinks</option>
                   <option>Music Events</option>
@@ -135,18 +135,19 @@
             <button type="button" class="primary button expanded search-button" id="itinerary-btn">
               Add to Itinerary
             </button>
-          </form>
+          
         </div>
         <div class="translucent-form-overlay" id="events-container">
           <h4>Desired Events</h4>
           <ul id="itinerary-list"> </ul>
           
           <div id="search-btn-div">
-            <button id="search-btn">Search</button>
+            <button type="submit" id="search-btn">Search</button>
             <div class="search-spinner"></div>
           </div>
           <button id="clear-page-btn" class="primary button">Clear Page</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
