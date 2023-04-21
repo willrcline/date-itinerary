@@ -1,6 +1,5 @@
 # Date Itinerary 
 
-
 # The Idea
 
 This website caters to individuals in romantic relationships who face challenges in planning dates, either due to their indecisiveness or lack of experience in organizing a well-crafted itinerary. If you find yourself struggling to decide on suitable date night activities, this website serves as a valuable resource to guide you through the process.
