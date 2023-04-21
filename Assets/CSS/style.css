@@ -243,9 +243,11 @@ label {
         padding: 10px;
     }
 }
-#box-of-prompt-response, #box-of-details-for-all-events {
+#box-of-prompt-response ul, #box-of-details-for-all-events{
     text-align: left;
+    list-style:none;
 }
+
 
 .animate-character {
     text-transform: uppercase;
