@@ -124,18 +124,19 @@ body {
     margin-top: 100px;
 }
 
-#search-btn {
+#search-btn, #clear-page-btn {
     background-color: #4CAF50;
     color: black;
+
     display: block;
-    margin: 0;
     height: 35px;
     width: 35%;
     color: black !important;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 6px auto;
     border: 1px solid black;
 }
+
 
 #search-btn button:hover {
     background-color: #368d39;
