@@ -254,6 +254,37 @@ $(document).on("click", ".remove-btn", function () {
     renderItineraryList();
 });
 
+// export function handleSearchButton(e) {
+//     e.preventDefault()
+
+//     var locationInput = $("#location").val()
+//     var dateInput = $("#myDatepicker").val()
+//     var timeOfDayInput = $("#timeOfDay").val()
+
+//     var itineraryInputs = {
+//         location: locationInput,
+//         date: dateInput,
+//         timeOfDay: timeOfDayInput,
+//     };
+
+//     for (var event of itineraryList) {
+//         callEventAPI(event, itineraryInputs);
+//     }
+
+//     setTimeout(function () {
+//         console.log("Timeout");
+//         console.log(realEvents);
+//         callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
+//         renderEventDetails();
+
+//         var searchBtnDiv = $("#search-btn-div")
+//         searchBtnDiv.removeClass('loading');
+//         searchBtnDiv.find('button').attr('disabled', false);
+//         searchBtnDiv.find('button').text("Search");
+//         searchBtnDiv.find('.search-spinner').hide();
+//     }, 8000);
+// }
+
 export function handleSearchButton(e) {
     e.preventDefault()
 
@@ -271,6 +302,12 @@ export function handleSearchButton(e) {
         timeOfDay: timeOfDayInput,
     };
 
+    var searchBtnDiv = $("#search-btn-div");
+    searchBtnDiv.addClass('loading');
+    searchBtnDiv.find('button').attr('disabled', true);
+    searchBtnDiv.find('button').text('Loading...');
+    searchBtnDiv.find('.search-spinner').show();
+
     for (var event of itineraryList) {
         callEventAPI(event, itineraryInputs);
     }
@@ -281,7 +318,6 @@ export function handleSearchButton(e) {
         callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
         renderEventDetails(realEvents);
 
-        var searchBtnDiv = $("#search-btn-div")
         searchBtnDiv.removeClass('loading');
         searchBtnDiv.find('button').attr('disabled', false);
         searchBtnDiv.find('button').text("Search");
