@@ -203,15 +203,15 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
         + "Event title: " + realEvent.title + "\n"
     }
 
-    prompt += "The itinerary is displayed in a format like this:" + "\n\
-    6:00 PM - Start the night<%br>" + "\n\
-    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature.<%br>" + '\n'
-
+    prompt += "The itinerary is displayed in a format like this (don't remove the \"<%br>\" tags):" + "\n\
+    6:00 PM - Start the night: Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature.<%br>" + "\n\
+    7:30 PM - Live music at The Continental Club: Head to The Continental Club, one of the oldest and most iconic live music venues in Austin, and enjoy a night of music and dancing with your partner. The intimate atmosphere and talented musicians are sure to make it a memorable experience.<%br>" + "\n\
+    8:30 PM - Sunset at Mount Bonnell: Drive to Mount Bonnell, one of the highest points in Austin, and watch the sunset with your partner. This breathtaking view is the perfect backdrop for a romantic moment.<%br>"
     return prompt
 }
 
 $("#itinerary-btn").on("click", handleAddToItineraryButton)
-$("#search-btn").on("click", handleSearchButton)
+$("form").on("submit", handleSearchButton)
 
 function handleAddToItineraryButton() {
     //.push input to list
@@ -254,42 +254,14 @@ $(document).on("click", ".remove-btn", function () {
     renderItineraryList();
 });
 
-// export function handleSearchButton(e) {
-//     e.preventDefault()
-
-//     var locationInput = $("#location").val()
-//     var dateInput = $("#myDatepicker").val()
-//     var timeOfDayInput = $("#timeOfDay").val()
-
-//     var itineraryInputs = {
-//         location: locationInput,
-//         date: dateInput,
-//         timeOfDay: timeOfDayInput,
-//     };
-
-//     for (var event of itineraryList) {
-//         callEventAPI(event, itineraryInputs);
-//     }
-
-//     setTimeout(function () {
-//         console.log("Timeout");
-//         console.log(realEvents);
-//         callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
-//         renderEventDetails();
-
-//         var searchBtnDiv = $("#search-btn-div")
-//         searchBtnDiv.removeClass('loading');
-//         searchBtnDiv.find('button').attr('disabled', false);
-//         searchBtnDiv.find('button').text("Search");
-//         searchBtnDiv.find('.search-spinner').hide();
-//     }, 8000);
-// }
 
 export function handleSearchButton(e) {
+    console.log("handleSearchButton")
     e.preventDefault()
 
     clearDescendants("box-of-prompt-response")
     clearDescendants("box-of-details-for-all-events")
+    realEvents = []
     deleteFromLocalStorage("dateData")
 
     var locationInput = $("#location").val()
@@ -363,5 +335,6 @@ function clearDescendants(elementId) {
 $("#clear-page-btn").on('click', function () {
     clearDescendants("box-of-prompt-response")
     clearDescendants("box-of-details-for-all-events")
+    realEvents = []
     deleteFromLocalStorage("dateData")
 })
