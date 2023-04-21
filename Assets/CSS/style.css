@@ -149,11 +149,18 @@ body {
     background-color: #4CAF50;
     color: black;
     display:block;
-    margin: 0 auto;
+    margin: 6px auto;
     /* margin-top: 20px;
     display: block;
     justify-content: center;
     align-items: center; */
+}
+
+#clear-page-btn {
+    background-color: #4CAF50;
+    color: black;
+    display:block;
+    margin: 0 auto;
 }
 
 #search-btn button {

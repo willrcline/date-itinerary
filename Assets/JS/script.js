@@ -15,6 +15,8 @@ var musicGenreSelect = $("#music-genre-select");
 var sportingSelect = $("#sporting-select");
 var movieGenreSelect = $("#movie-genre-select");
 
+loadItineraryAndEventDetailsFromLocalStorage()
+
 eventTypeSelect.addEventListener("change", function () {
     if (eventTypeSelect.value == "Food & Drinks") {
         cuisineDropdown.style.display = "block";
@@ -97,7 +99,8 @@ export function callEventAPI(event, itineraryInputs) {
         })
 }
 
-export function renderEventDetails() {
+
+export function renderEventDetails(realEvents) {
     for (var index in realEvents) {
         var event = realEvents[index]
         console.log("RenderEventDetails")
@@ -135,12 +138,38 @@ export function callOpenAIAPI(prompt) {
         .then((result) => {
             var promptResponse = result.choices[0].message.content
             console.log(promptResponse)
+            setDateDataToLocalStorage(promptResponse)
             renderItinerary(promptResponse)
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 }
+
+function loadItineraryAndEventDetailsFromLocalStorage() {
+    if (localStorage.getItem("dateData")) {
+        var dateData = JSON.parse(localStorage.getItem("dateData"));
+        renderItinerary(dateData.promptResponse)
+        renderEventDetails(dateData.realEvents)
+      } else {
+        return null;
+      }
+        
+
+}
+
+function setDateDataToLocalStorage(promptResponse) {
+    localStorage.setItem('dateData', JSON.stringify({realEvents: realEvents, promptResponse: promptResponse}));
+}
+
+function deleteFromLocalStorage(key) {
+    if (localStorage.getItem(key) !== null) {
+      localStorage.removeItem(key);
+    } else {
+      return
+    }
+  }
+
 
 function renderItinerary(promptResponse) {
     var promptResponseArray = parsePromptResponseIntoAnArray(promptResponse)
@@ -175,8 +204,8 @@ export function createPromptForOpenAIAPI(location, calendarDay, timeOfDay) {
     }
 
     prompt += "The itinerary is displayed in a format like this:" + "\n\
-    6:00 PM - Start the night" + "<%br>\
-    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature.<%br>"
+    6:00 PM - Start the night<%br>" + "\n\
+    Begin your romantic date night by meeting your partner at a picturesque location, such as the Lady Bird Lake Boardwalk or the Zilker Botanical Garden. Take a leisurely stroll, hand-in-hand, and enjoy each other's company surrounded by nature.<%br>" + '\n'
 
     return prompt
 }
@@ -228,6 +257,10 @@ $(document).on("click", ".remove-btn", function () {
 export function handleSearchButton(e) {
     e.preventDefault()
 
+    clearDescendants("box-of-prompt-response")
+    clearDescendants("box-of-details-for-all-events")
+    deleteFromLocalStorage("dateData")
+
     var locationInput = $("#location").val()
     var dateInput = $("#myDatepicker").val()
     var timeOfDayInput = $("#timeOfDay").val()
@@ -246,7 +279,7 @@ export function handleSearchButton(e) {
         console.log("Timeout");
         console.log(realEvents);
         callOpenAIAPI(createPromptForOpenAIAPI(itineraryInputs.location, itineraryInputs.calendarDay, itineraryInputs.date))
-        renderEventDetails();
+        renderEventDetails(realEvents);
 
         var searchBtnDiv = $("#search-btn-div")
         searchBtnDiv.removeClass('loading');
@@ -257,18 +290,42 @@ export function handleSearchButton(e) {
 }
 
 
+
 // stores itineraryList in localStorage
-localStorage.setItem('itineraryList', JSON.stringify(itineraryList));
+// localStorage.setItem('itineraryList', JSON.stringify(itineraryList));
 // retrieves itineraryList from localStorage
-var storedItineraryList = localStorage.getItem('itineraryList');
-if (storedItineraryList) {
-    itineraryList = JSON.parse(storedItineraryList);
-}
-function clearSection() {
-    var sectionElement = document.getElementById('mySection');
-    if (sectionElement) {
-        sectionElement.innerHTML = '';
+// var storedItineraryList = localStorage.getItem('itineraryList');
+// if (storedItineraryList) {
+//     itineraryList = JSON.parse(storedItineraryList);
+// }
+
+
+function clearDescendants(elementId) {
+    const element = document.getElementById(elementId);
+  
+    if (element) {
+      function removeAllChildren(node) {
+        while (node.firstChild) {
+          removeAllChildren(node.firstChild);
+          node.removeChild(node.firstChild);
+        }
+      }
+  
+      removeAllChildren(element);
+    } else {
+      console.warn(`Element with ID "${elementId}" not found.`);
     }
 }
+// function clearSection() {
+//     var sectionElement = document.getElementById('mySection');
+//     if (sectionElement) {
+//         sectionElement.innerHTML = '';
+//     }
+// }
+// clearSection('mySection');
 
-clearSection('mySection');
+$("#clear-page-btn").on('click', function () {
+    clearDescendants("box-of-prompt-response")
+    clearDescendants("box-of-details-for-all-events")
+    deleteFromLocalStorage("dateData")
+})
