@@ -1,1 +1,3 @@
-export var OpenAIAPIKey = ""
+const OpenAIAPIKey = process.env.OpenAIAPIKey;
+
+
