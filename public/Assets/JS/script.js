@@ -1,5 +1,3 @@
-import { OpenAIAPIKey } from "./config.js"
-
 export var itineraryList = []
 export var realEvents = []
 
@@ -117,14 +115,20 @@ export function renderEventDetails(realEvents) {
     }
 }
 
-export function callOpenAIAPI(prompt) {
-    const url = 'https://api.openai.com/v1/chat/completions';
+async function getOpenAIAPIKey() {
+    const response = await fetch('/api-key');
+    const data = await response.json();
+    return data.OpenAIAPIKey
+}
 
+export async function callOpenAIAPI(prompt) {
+    const url = 'https://api.openai.com/v1/chat/completions';
     const data = {
         model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.7,
     };
+    const OpenAIAPIKey = await getOpenAIAPIKey();
 
     fetch(url, {
         method: 'POST',
@@ -144,6 +148,7 @@ export function callOpenAIAPI(prompt) {
         .catch((error) => {
             console.error('Error:', error);
         });
+
 }
 
 function loadItineraryAndEventDetailsFromLocalStorage() {
@@ -154,8 +159,6 @@ function loadItineraryAndEventDetailsFromLocalStorage() {
       } else {
         return null;
       }
-        
-
 }
 
 function setDateDataToLocalStorage(promptResponse) {
@@ -218,10 +221,6 @@ function handleAddToItineraryButton() {
     var eventTypeInput = $('#event-type').val();
     if (!itineraryList.includes(eventTypeInput)) {
         itineraryList.push(subEvent + ", " + eventTypeInput);
-        
-
-        //append to screen
-        //clearSection(“#itinerary-list”)
     }
     renderItineraryList();
 }
