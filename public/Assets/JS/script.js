@@ -129,6 +129,7 @@ export async function callOpenAIAPI(prompt) {
         temperature: 0.7,
     };
     const OpenAIAPIKey = await getOpenAIAPIKey();
+    console.log(OpenAIAPIKey)
 
     fetch(url, {
         method: 'POST',
