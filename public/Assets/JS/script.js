@@ -64,17 +64,46 @@ movieGenreSelect.on("change", function () {
     subEvent = movieGenreSelect.val()
 });
 
+// export function callEventAPI(event, itineraryInputs) {
+//     const API_KEY = 'b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837';
+//     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
+//     const ENGINE = 'google_events';
+//     const HL = 'en';
+//     const GL = 'us';
+//     const location = itineraryInputs.location
+
+//     var url = `https://serpapi.com/search.json?api_key=${API_KEY}&engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
+//     // var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+//     // url = proxyUrl + url
+
+//     fetch(url)
+//         .then((response) => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! Status: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then((data) => {
+//             var firstEventResult = data.events_results[0]
+//             realEvents.push(firstEventResult)
+//             console.log("CallEventAPI")
+//             console.log(firstEventResult)
+//             console.log(realEvents)
+//             return
+//         })
+//         .catch((error) => {
+//             console.error('There was a problem with the fetch operation:', error);
+//         })
+// }
+
 export function callEventAPI(event, itineraryInputs) {
-    const API_KEY = 'b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837';
     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
     const ENGINE = 'google_events';
     const HL = 'en';
     const GL = 'us';
-    const location = itineraryInputs.location
+    const location = itineraryInputs.location;
 
-    var url = `https://serpapi.com/search.json?api_key=${API_KEY}&engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
-    // var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    // url = proxyUrl + url
+    var url = `/proxy-serp-api?engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
 
     fetch(url)
         .then((response) => {
@@ -90,8 +119,6 @@ export function callEventAPI(event, itineraryInputs) {
             console.log(firstEventResult)
             console.log(realEvents)
             return
-            //.description
-            //.title
         })
         .catch((error) => {
             console.error('There was a problem with the fetch operation:', error);
@@ -117,7 +144,7 @@ export function renderEventDetails(realEvents) {
 }
 
 async function getOpenAIAPIKey() {
-    const response = await fetch('/api-key');
+    const response = await fetch('/openai-api-key');
     const data = await response.json();
     return data.OpenAIAPIKey
 }
@@ -130,7 +157,7 @@ export async function callOpenAIAPI(prompt) {
         temperature: 0.7,
     };
     const OpenAIAPIKey = await getOpenAIAPIKey();
-    console.log(OpenAIAPIKey)
+    // console.log(OpenAIAPIKey)
 
     fetch(url, {
         method: 'POST',
@@ -334,6 +361,7 @@ function clearDescendants(elementId) {
 // clearSection('mySection');
 
 $("#clear-page-btn").on('click', function () {
+    console.log("clear page")
     clearDescendants("box-of-prompt-response")
     clearDescendants("box-of-details-for-all-events")
     realEvents = []
