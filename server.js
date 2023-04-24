@@ -3,7 +3,6 @@ const app = express();
 const path = require('path');
 require('dotenv').config();
 const OpenAIAPIKey = process.env.OpenAIAPIKey;
-module.exports = OpenAIAPIKey;
 
 const PORT = process.env.PORT || 3000;
 

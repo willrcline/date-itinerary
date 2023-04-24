@@ -65,17 +65,18 @@ movieGenreSelect.on("change", function () {
 });
 
 export function callEventAPI(event, itineraryInputs) {
-    const API_KEY = 'bc07e284e5247ec2ea3d7446fa38f0ceb101ac770aae337a65cf001156857018';
+    const API_KEY = 'b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837';
     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
     const ENGINE = 'google_events';
     const HL = 'en';
     const GL = 'us';
     const location = itineraryInputs.location
 
-    const url = `https://serpapi.com/search.json?api_key=${API_KEY}&engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
-    var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    // proxyUrl = 'https://api.allorigins.win/raw?url='
-    fetch(proxyUrl + url)
+    var url = `https://serpapi.com/search.json?api_key=${API_KEY}&engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
+    // var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    // url = proxyUrl + url
+
+    fetch(url)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
