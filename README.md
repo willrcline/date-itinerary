@@ -72,7 +72,7 @@ Navigate to the urls located below to begin planning your date!
 
 [Live Github Page](https://willrcline.github.io/date-itinerary/)
 
-[Fully functioning deployment on heroku](https://date-itinerary.herokuapp.com/)
+[Fully functioning deployment on Heroku](https://date-itinerary.herokuapp.com/)
 
 [Repository](https://github.com/willrcline/date-itinerary)
 
