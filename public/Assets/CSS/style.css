@@ -72,6 +72,24 @@ h3 {
     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
+.btn.btn-info {
+    background-color: #202f6b;
+    color: #ffffff;
+}
+
+.btn.btn-info:hover {
+    background-color: #31e1bd;
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.7);
+    /* 80% opacity */
+}
+
+#navbar-list {
+    background-color: transparent;
+}
+
 body {
     background-image: url('../images/shutterstock_96325322.jpg');
     background-repeat: no-repeat;
