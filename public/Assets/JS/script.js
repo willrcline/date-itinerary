@@ -64,37 +64,6 @@ movieGenreSelect.on("change", function () {
     subEvent = movieGenreSelect.val()
 });
 
-// export function callEventAPI(event, itineraryInputs) {
-//     const API_KEY = 'b2d18364dc288147e06aee5c96e4c16301319c027008e008f003783b10527837';
-//     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
-//     const ENGINE = 'google_events';
-//     const HL = 'en';
-//     const GL = 'us';
-//     const location = itineraryInputs.location
-
-//     var url = `https://serpapi.com/search.json?api_key=${API_KEY}&engine=${ENGINE}&q=${QUERY}&hl=${HL}&gl=${GL}&location=${location}`;
-//     // var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-//     // url = proxyUrl + url
-
-//     fetch(url)
-//         .then((response) => {
-//             if (!response.ok) {
-//                 throw new Error(`HTTP error! Status: ${response.status}`);
-//             }
-//             return response.json();
-//         })
-//         .then((data) => {
-//             var firstEventResult = data.events_results[0]
-//             realEvents.push(firstEventResult)
-//             console.log("CallEventAPI")
-//             console.log(firstEventResult)
-//             console.log(realEvents)
-//             return
-//         })
-//         .catch((error) => {
-//             console.error('There was a problem with the fetch operation:', error);
-//         })
-// }
 
 export function callEventAPI(event, itineraryInputs) {
     const QUERY = event + " in the " + itineraryInputs.timeOfDay + " on " + itineraryInputs.date;
@@ -139,7 +108,6 @@ export function renderEventDetails(realEvents) {
         ul.append(titleLi);
 
         $("#box-of-details-for-all-events").append(ul)
-
     }
 }
 
